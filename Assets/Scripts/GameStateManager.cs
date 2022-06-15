@@ -7,11 +7,6 @@ public class GameStateManager : MonoBehaviour
     private bool gameEnded;
     void Start()
     {
-        Init();
-    }
-
-    void Init()
-    {
         gameEnded = false;
         gameOverTextObject.SetActive(false);
     }
@@ -23,27 +18,8 @@ public class GameStateManager : MonoBehaviour
             return;
         }
         gameEnded = true;
-        Debug.Log("Game over!");
-        LoadGameOverScene();
-        Invoke("RestartGame", 5f);
-        ResumeTime();
-    }
-
-    void LoadGameOverScene()
-    {
-        Debug.Log("Overlay should pop up");
         gameOverTextObject.SetActive(true);
-        Debug.Log("IsActive: " + gameOverTextObject.activeSelf);
-    }
-
-    void PauseTime()
-    {
-        Time.timeScale = 0f;
-    }
-
-    void ResumeTime()
-    {
-        Time.timeScale = 1f;
+        Invoke("RestartGame", 5f);
     }
 
     void RestartGame()
