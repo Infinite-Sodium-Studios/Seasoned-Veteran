@@ -20,12 +20,14 @@ public class EnemySpawning : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
     private Stopwatch stopwatch;
+    private GameObject player;
     private GameObject[] respawnPoints;
     private long msSinceLastSpawn;
     readonly private long respawnFrequencyMs = 2_000;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
         stopwatch = new Stopwatch();
         msSinceLastSpawn = 0;
@@ -52,7 +54,7 @@ public class EnemySpawning : MonoBehaviour
         var enemyPrefab = enemyPrefabs[enemyIndex];
         var enemy = Instantiate(enemyPrefab, motion.location, new Quaternion());
         var movement = enemy.GetComponent<EnemyMovement>();
-        movement.Initialize(motion.direction);
+        movement.Init(player);
         return enemy;
     }
 }

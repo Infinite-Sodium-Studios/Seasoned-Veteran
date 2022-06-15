@@ -1,26 +1,25 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Vector3 targetVelocity;
+    private NavMeshAgent agent;
+    private GameObject player;
     readonly private float speed = 3.0f;
 
-    static Vector3 WithoutY(Vector3 vec)
+    void Start()
     {
-        var res = vec;
-        res.y = 0;
-        return res;
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
     }
 
-    public void Initialize(Vector3 initialDirection)
+    public void Init(GameObject playerRef)
     {
-        targetVelocity = WithoutY(initialDirection).normalized * speed;
+        player = playerRef;
     }
 
     void FixedUpdate()
     {
-        var rigidBody = GetComponent<Rigidbody>();
-        var currentVelocity = rigidBody.velocity;
-        rigidBody.AddForce(targetVelocity - WithoutY(currentVelocity), ForceMode.VelocityChange);
+        agent.destination = player.transform.position;
     }
 }
