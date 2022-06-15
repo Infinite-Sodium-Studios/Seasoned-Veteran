@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LivesManager : MonoBehaviour
 {
+    [SerializeField] private GameStateManager gameManager;
     [SerializeField] private int initialLives;
     private int currentLives;
     void Start()
@@ -19,9 +20,9 @@ public class LivesManager : MonoBehaviour
     public void HitEvent()
     {
         currentLives--;
-        if (currentLives == 0)
+        if (currentLives <= 0)
         {
-            StateTransition.GameOver();
+            gameManager.GameOver();
         }
     }
 }
