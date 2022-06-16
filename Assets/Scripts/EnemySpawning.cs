@@ -7,10 +7,9 @@ struct SpawnMotion
     {
         Vector3 position = boxCollider.transform.position;
         Vector3 size = boxCollider.size;
-        Quaternion rotation = boxCollider.transform.rotation;
-        Vector3 forwardDirection = new Vector3(size.x, 0, 0);
-        direction = rotation * forwardDirection;
-        location = position + rotation * size;
+        Vector3 orientation = boxCollider.transform.right;
+        direction = orientation;
+        location = position + orientation * size.magnitude;
     }
     public Vector3 location;
     public Vector3 direction;
