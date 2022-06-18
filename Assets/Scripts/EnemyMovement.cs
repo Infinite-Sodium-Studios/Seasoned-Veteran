@@ -20,6 +20,8 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Assert(agent != null, "Agent cannot be null");
+        Debug.Assert(player != null, "Player cannot be null");
         agent.destination = player.transform.position;
     }
 }

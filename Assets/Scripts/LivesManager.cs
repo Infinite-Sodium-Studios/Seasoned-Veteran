@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LivesManager : MonoBehaviour
+public class LivesManager : MonoBehaviour, IHittable
 {
     [SerializeField] private GameStateManager gameManager;
     [SerializeField] private int initialLives;
@@ -16,8 +16,7 @@ public class LivesManager : MonoBehaviour
         return Mathf.Max(0, currentLives);
     }
 
-    // Update is called once per frame
-    public void HitEvent()
+    public void HitEvent(GameObject hitter)
     {
         currentLives--;
         if (currentLives <= 0)

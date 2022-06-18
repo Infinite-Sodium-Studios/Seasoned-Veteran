@@ -1,8 +1,13 @@
 using UnityEngine;
 using System.Diagnostics;
 
-struct SpawnMotion
+public struct SpawnMotion
 {
+    public SpawnMotion(Vector3 _location, Vector3 _direction)
+    {
+        location = _location;
+        direction = _direction;
+    }
     public SpawnMotion(BoxCollider boxCollider)
     {
         Vector3 position = boxCollider.transform.position;
@@ -48,13 +53,20 @@ public class EnemySpawning : MonoBehaviour
         }
     }
 
-    GameObject Respawn(SpawnMotion motion)
+    public GameObject Respawn(SpawnMotion motion)
     {
         var enemyIndex = Random.Range(0, enemyPrefabs.Length);
+        return Respawn(enemyIndex, motion);
+    }
+
+    public GameObject Respawn(int enemyIndex, SpawnMotion motion)
+    {
+        UnityEngine.Debug.Assert(enemyIndex >= 0 && enemyIndex < enemyPrefabs.Length);
         var enemyPrefab = enemyPrefabs[enemyIndex];
         var enemy = Instantiate(enemyPrefab, motion.location, new Quaternion());
         var movement = enemy.GetComponent<EnemyMovement>();
         movement.Init(player);
+        enemy.GetComponent<EnemyTypeManager>().SetEnemyType(enemyIndex);
         return enemy;
     }
 }
