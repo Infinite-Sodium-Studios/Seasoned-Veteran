@@ -11,6 +11,8 @@ public class PlayerShootController : MonoBehaviour
     [SerializeField] private float msBetweenHitscanShots;
     [SerializeField] private float hitscanRange;
 
+    [SerializeField] private GameObject hitscanPrefab;
+
     [SerializeField] private float msBetweenProjectileShots;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private GameObject projectilePrefab;
@@ -19,7 +21,7 @@ public class PlayerShootController : MonoBehaviour
     {
         _input = GetComponent<StarterAssetsInputs>();
         _player = gameObject;
-        BaseWeapon railGun = new HitscanShoot(msBetweenHitscanShots, hitscanRange);
+        BaseWeapon railGun = new HitscanShoot(msBetweenHitscanShots, hitscanRange, hitscanPrefab);
         BaseWeapon rocketLauncher = new ProjectileShoot(msBetweenProjectileShots, projectileSpeed, projectilePrefab);
         weapons = new[] { railGun, rocketLauncher };
         activeWeapon = weapons[0];
