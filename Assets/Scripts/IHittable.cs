@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface IHittable
 {
-    void HitEvent(GameObject hitter);
+    void HitEvent(GameObject hitter, WeaponStats weaponStats);
 }

@@ -15,9 +15,7 @@ public class PlayerScoreManager : MonoBehaviour
 
     public void OnEnemyKill()
     {
-        Debug.Log("OnEnemyKill: " + currentScore);
         currentScore++;
-        Debug.Log("Newscore " + currentScore);
     }
 
     public int GetScore()

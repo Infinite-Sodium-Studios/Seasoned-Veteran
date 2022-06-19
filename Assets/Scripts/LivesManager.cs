@@ -16,7 +16,7 @@ public class LivesManager : MonoBehaviour, IHittable
         return Mathf.Max(0, currentLives);
     }
 
-    public void HitEvent(GameObject hitter)
+    public void HitEvent(GameObject hitter, WeaponStats weaponStats)
     {
         currentLives--;
         if (currentLives <= 0)

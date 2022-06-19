@@ -66,7 +66,9 @@ public class EnemySpawning : MonoBehaviour
         var enemy = Instantiate(enemyPrefab, motion.location, new Quaternion());
         var movement = enemy.GetComponent<EnemyMovement>();
         movement.Init(player);
-        enemy.GetComponent<EnemyTypeManager>().SetEnemyType(enemyIndex);
+        var typeManager = enemy.GetComponent<EnemyTypeManager>();
+        UnityEngine.Debug.Assert(typeManager != null);
+        typeManager.SetEnemyType(enemyIndex);
         return enemy;
     }
 }

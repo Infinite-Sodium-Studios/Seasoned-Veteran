@@ -4,11 +4,13 @@ public class ProjectileShoot : BaseWeapon
 {
     private float projectileSpeed;
     private GameObject projectilePrefab;
+    private ExplosionParameters explosionParameters;
 
-    public ProjectileShoot(float _minMsBetweenShots, float _projectileSpeed, GameObject _projectilePrefab) : base(_minMsBetweenShots)
+    public ProjectileShoot(float _minMsBetweenShots, float _projectileSpeed, WeaponStats _weaponStats, GameObject _projectilePrefab, ExplosionParameters _explosionParameters = null) : base(_minMsBetweenShots, _weaponStats)
     {
         projectileSpeed = _projectileSpeed;
         projectilePrefab = _projectilePrefab;
+        explosionParameters = _explosionParameters;
     }
 
     public override void OnShoot(GameObject shooter)
@@ -21,7 +23,7 @@ public class ProjectileShoot : BaseWeapon
         Debug.Log("Ignore between " + projectile.name + " and " + shooter.name);
 
         var projectileBehavior = projectile.GetComponent<ProjectileBehavior>();
-        projectileBehavior.Init(projectileSpeed);
+        projectileBehavior.Init(projectileSpeed, weaponStats, explosionParameters);
         projectileBehavior.StartMovement();
     }
 }
