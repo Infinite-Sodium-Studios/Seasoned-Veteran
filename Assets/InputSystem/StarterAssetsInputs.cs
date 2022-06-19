@@ -55,7 +55,7 @@ namespace StarterAssets
         {
             if (value.isPressed)
             {
-                SelectWeapon1Input();
+                SelectWeaponIndexInput(0);
             }
         }
 
@@ -63,7 +63,15 @@ namespace StarterAssets
         {
             if (value.isPressed)
             {
-                SelectWeapon2Input();
+                SelectWeaponIndexInput(1);
+            }
+        }
+
+        public void OnSelectWeapon3(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                SelectWeaponIndexInput(2);
             }
         }
 #endif
@@ -94,14 +102,9 @@ namespace StarterAssets
             shoot = newShootState;
         }
 
-        public void SelectWeapon1Input()
+        public void SelectWeaponIndexInput(int weaponIndex)
         {
-            selectedWeapon = 0;
-        }
-
-        public void SelectWeapon2Input()
-        {
-            selectedWeapon = 1;
+            selectedWeapon = weaponIndex;
         }
 
         private void OnApplicationFocus(bool hasFocus)

@@ -1,30 +1,34 @@
 using UnityEngine;
 using StarterAssets;
+using System.Collections.Generic;
 
 public class PlayerShootController : MonoBehaviour
 {
     private StarterAssetsInputs _input;
     private GameObject _player;
-    private BaseWeapon[] weapons;
-    private BaseWeapon activeWeapon;
+    private List<BaseWeapon> weapons;
+    private List<GameObject> weaponModels;
+    int activeWeaponIndex;
 
-    [SerializeField] private float msBetweenHitscanShots;
-    [SerializeField] private float hitscanRange;
-
-    [SerializeField] private GameObject hitscanPrefab;
-
-    [SerializeField] private float msBetweenProjectileShots;
-    [SerializeField] private float projectileSpeed;
-    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private HitscanWeaponParameters weapon1Parameters;
+    [SerializeField] private ProjectileWeaponParameters weapon2Parameters;
+    [SerializeField] private HitscanWeaponParameters weapon3Parameters;
 
     void Start()
     {
         _input = GetComponent<StarterAssetsInputs>();
         _player = gameObject;
-        BaseWeapon railGun = new HitscanShoot(msBetweenHitscanShots, hitscanRange, hitscanPrefab);
-        BaseWeapon rocketLauncher = new ProjectileShoot(msBetweenProjectileShots, projectileSpeed, projectilePrefab);
-        weapons = new[] { railGun, rocketLauncher };
-        activeWeapon = weapons[0];
+
+        var allWeaponParameters = new List<IWeaponParameters> { weapon1Parameters, weapon2Parameters, weapon3Parameters };
+
+        weapons = allWeaponParameters.ConvertAll<BaseWeapon>(weaponParams => weaponParams.ToBaseWeapon());
+        weaponModels = allWeaponParameters.ConvertAll<GameObject>(weaponParams => weaponParams.GetWeaponModel());
+        activeWeaponIndex = 0;
+        for (int i = 0; i < weaponModels.Count; i++)
+        {
+            weaponModels[i].SetActive(false);
+        }
+        weaponModels[activeWeaponIndex].SetActive(true);
     }
 
     void Update()
@@ -39,14 +43,25 @@ public class PlayerShootController : MonoBehaviour
 
     void CheckSelectedWeapon()
     {
-        activeWeapon = weapons[_input.selectedWeapon];
+        int currentActiveWeaponIndex = _input.selectedWeapon;
+        int previousActiveWeaponIndex = activeWeaponIndex;
+        if (currentActiveWeaponIndex == previousActiveWeaponIndex)
+        {
+            return;
+        }
+        weaponModels[currentActiveWeaponIndex].SetActive(true);
+        weaponModels[previousActiveWeaponIndex].SetActive(false);
+        activeWeaponIndex = currentActiveWeaponIndex;
+
     }
 
     void Shoot()
     {
         if (_input.shoot)
         {
-            activeWeapon.ShootFrom(_player);
+            Debug.Assert(activeWeaponIndex >= 0);
+            Debug.Assert(activeWeaponIndex < weapons.Count);
+            weapons[activeWeaponIndex].ShootFrom(_player);
         }
     }
 }
