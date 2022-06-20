@@ -74,16 +74,6 @@ public class ProjectileBehavior : MonoBehaviour
                     continue;
                 }
                 hitObjectIds[currGameObject.GetInstanceID()] = currGameObject;
-
-                if (currGameObject.TryGetComponent<Rigidbody>(out var rb))
-                {
-                    Debug.Log("Applying explosion force to " + rb.gameObject);
-                    rb.AddExplosionForce(explosionParameters.explosionStrength, contact.point, 0.1f, 3.0f, ForceMode.Acceleration);
-                }
-                else
-                {
-                    Debug.Log("Cannot apply explosive force to " + currGameObject);
-                }
             }
         }
         foreach (var (id, currGameObject) in hitObjectIds)
