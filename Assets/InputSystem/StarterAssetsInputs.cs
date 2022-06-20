@@ -74,6 +74,14 @@ namespace StarterAssets
                 SelectWeaponIndexInput(2);
             }
         }
+
+        public void OnSelectWeapon4(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                SelectWeaponIndexInput(3);
+            }
+        }
 #endif
 
 
