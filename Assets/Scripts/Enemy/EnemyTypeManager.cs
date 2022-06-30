@@ -2,29 +2,24 @@ using UnityEngine;
 
 public class EnemyTypeManager : MonoBehaviour
 {
-    public int enemyType = -1;
-    private EnemySpawning spawner;
+    public GameObject instantiationRoot;
 
-
-    void Start()
+    public void Init(GameObject baseEnemyObject)
     {
-        spawner = GameObject.Find("EnemySpawnObject").GetComponent<EnemySpawning>();
+        var baseEnemyTypeManager = baseEnemyObject.GetComponent<EnemyTypeManager>();
+        Debug.Assert(baseEnemyTypeManager != null, "Can only instantiate enemy off of object with EnemyTypeManager component");
+        instantiationRoot = baseEnemyTypeManager.GetInstantiationRoot();
     }
 
-    bool IsValidType(int type)
+    GameObject GetInstantiationRoot()
     {
-        return type >= 0 && type < spawner.enemyPrefabs.Length;
+        return instantiationRoot != null ? instantiationRoot : gameObject;
     }
 
-    public void SetEnemyType(int type)
+    public bool IsSameEnemyType(GameObject other)
     {
-        Debug.Assert(enemyType == -1, "Cannot set type of enemy twice");
-        enemyType = type;
-    }
-
-    public int GetEnemyType()
-    {
-        Debug.Assert(IsValidType(enemyType), "Must have a valid enemy type");
-        return enemyType;
+        var otherEnemyTypeManager = other.GetComponent<EnemyTypeManager>();
+        Debug.Assert(otherEnemyTypeManager != null, "Enemy object must have EnemyTypeManager component");
+        return GetInstantiationRoot() == otherEnemyTypeManager.GetInstantiationRoot();
     }
 }

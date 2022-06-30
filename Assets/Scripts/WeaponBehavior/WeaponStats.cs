@@ -1,25 +1,52 @@
+using UnityEngine;
+using System.Collections.Generic;
+
 public class WeaponStats
 {
-    private int[] compatibleWith;
+    private List<GameObject> hittableEnemies;
+    private int damage;
 
     public WeaponStats()
     {
-        compatibleWith = new int[0];
+        hittableEnemies = new List<GameObject>();
+        damage = 0;
     }
-    public WeaponStats(int[] _compatibleWith)
+    public WeaponStats(List<GameObject> _hittableEnemies, int _damage)
     {
-        compatibleWith = _compatibleWith;
+        hittableEnemies = _hittableEnemies;
+        damage = _damage;
+    }
+    public WeaponStats(WeaponStats other)
+    {
+        hittableEnemies = other.hittableEnemies;
+        damage = other.damage;
     }
 
-    public bool IsCompatibleWithEnemy(int enemyIndex)
+    public WeaponStats WithDamage(int damage)
     {
-        foreach (var compatibleIndex in compatibleWith)
+        WeaponStats weaponStats = new WeaponStats(this);
+        weaponStats.damage = damage;
+        return weaponStats;
+    }
+
+    public bool CanHitEnemy(GameObject enemyObject)
+    {
+
+        Debug.Assert(enemyObject != null, "Cannot check hittability of non-existent enemyObject");
+        var enemyTypeManager = enemyObject.GetComponent<EnemyTypeManager>();
+        Debug.Assert(enemyTypeManager != null, "All enemies should have an EnemyTypeManager component");
+        foreach (var hittableEnemy in hittableEnemies)
         {
-            if (compatibleIndex == enemyIndex)
+            if (enemyTypeManager.IsSameEnemyType(hittableEnemy))
             {
                 return true;
             }
         }
         return false;
+    }
+
+    public int DamageToEnemy(GameObject enemyObject)
+    {
+        return damage;
     }
 }
