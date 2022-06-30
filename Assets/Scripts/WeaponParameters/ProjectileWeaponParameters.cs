@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class ProjectileWeaponParameters : IWeaponParameters
@@ -8,7 +9,7 @@ public class ProjectileWeaponParameters : IWeaponParameters
     public float projectileSpeed;
     public GameObject projectilePrefab;
     public GameObject projectileWeaponModel;
-    public int[] hittableEnemyTypes;
+    public List<GameObject> hittableEnemyTypes;
     public ExplosionParameters explosionParameters;
 
     public BaseWeapon ToBaseWeapon()

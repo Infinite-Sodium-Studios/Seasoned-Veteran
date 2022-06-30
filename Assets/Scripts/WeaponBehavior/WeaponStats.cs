@@ -1,21 +1,28 @@
+using UnityEngine;
+using System.Collections.Generic;
+
 public class WeaponStats
 {
-    private int[] compatibleWith;
+    private List<GameObject> hittableEnemies;
 
     public WeaponStats()
     {
-        compatibleWith = new int[0];
+        hittableEnemies = new List<GameObject>();
     }
-    public WeaponStats(int[] _compatibleWith)
+    public WeaponStats(List<GameObject> _hittableEnemies)
     {
-        compatibleWith = _compatibleWith;
+        hittableEnemies = _hittableEnemies;
     }
 
-    public bool IsCompatibleWithEnemy(int enemyIndex)
+    public bool CanHitEnemy(GameObject enemyObject)
     {
-        foreach (var compatibleIndex in compatibleWith)
+
+        Debug.Assert(enemyObject != null, "Cannot check hittability of non-existent enemyObject");
+        var enemyTypeManager = enemyObject.GetComponent<EnemyTypeManager>();
+        Debug.Assert(enemyTypeManager != null, "All enemies should have an EnemyTypeManager component");
+        foreach (var hittableEnemy in hittableEnemies)
         {
-            if (compatibleIndex == enemyIndex)
+            if (enemyTypeManager.IsSameEnemyType(hittableEnemy))
             {
                 return true;
             }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class HitscanWeaponParameters : IWeaponParameters
@@ -8,7 +9,7 @@ public class HitscanWeaponParameters : IWeaponParameters
     public float hitscanRange;
     public GameObject hitscanPrefab;
     public GameObject hitscanWeaponModel;
-    public int[] hittableEnemyTypes;
+    public List<GameObject> hittableEnemyTypes;
 
     public BaseWeapon ToBaseWeapon()
     {

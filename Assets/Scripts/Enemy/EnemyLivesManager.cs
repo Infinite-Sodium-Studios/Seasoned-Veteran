@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyLivesManager : MonoBehaviour, IHittable
 {
     [SerializeField] private int initialHealth;
-    private EnemyTypeManager enemyTypeManager;
+    private GameObject enemyObject;
     private PlayerScoreManager playerScoreManager;
 
     private EnemySpawning spawner;
@@ -13,9 +13,8 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         Debug.Assert(initialHealth > 0);
         currentHealth = initialHealth;
         spawner = GameObject.Find("EnemySpawnObject").GetComponent<EnemySpawning>();
-        enemyTypeManager = gameObject.GetComponent<EnemyTypeManager>();
+        enemyObject = gameObject;
         playerScoreManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScoreManager>();
-        Debug.Assert(enemyTypeManager != null, "All enemies should have a type");
     }
 
     public void HitEvent(GameObject hitter, WeaponStats weaponStats)
@@ -24,9 +23,12 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         {
             return;
         }
-        Debug.Assert(enemyTypeManager != null, "All enemies should have a type");
-        int typeOfEnemy = enemyTypeManager.enemyType;
-        if (weaponStats.IsCompatibleWithEnemy(typeOfEnemy))
+
+        if (enemyObject == null)
+        {
+            return;
+        }
+        if (weaponStats.CanHitEnemy(enemyObject))
         {
             currentHealth--;
             if (currentHealth <= 0)
@@ -39,11 +41,10 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         else
         {
             Debug.Log("Doubled!");
-            int enemyType = gameObject.GetComponent<EnemyTypeManager>().GetEnemyType();
             var collider = gameObject.GetComponent<Collider>();
             var sizeRight = 1.5f * collider.bounds.size.x;
             Vector3 spawnLocation = gameObject.transform.position + Vector3.right * sizeRight;
-            spawner.Respawn(enemyType, new SpawnMotion(spawnLocation, gameObject.transform.forward));
+            var respawnedObject = spawner.Respawn(enemyObject, new SpawnMotion(spawnLocation, gameObject.transform.forward));
         }
     }
 }

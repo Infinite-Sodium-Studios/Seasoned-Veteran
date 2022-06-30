@@ -55,19 +55,17 @@ public class EnemySpawning : MonoBehaviour
     public GameObject Respawn(SpawnMotion motion)
     {
         var enemyIndex = Random.Range(0, enemyPrefabs.Length);
-        return Respawn(enemyIndex, motion);
+        var enemyPrefab = enemyPrefabs[enemyIndex];
+        return Respawn(enemyPrefab, motion);
     }
 
-    public GameObject Respawn(int enemyIndex, SpawnMotion motion)
+    public GameObject Respawn(GameObject baseEnemyObject, SpawnMotion motion)
     {
-        UnityEngine.Debug.Assert(enemyIndex >= 0 && enemyIndex < enemyPrefabs.Length);
-        var enemyPrefab = enemyPrefabs[enemyIndex];
-        var enemy = Instantiate(enemyPrefab, motion.location, new Quaternion());
+        var enemy = Instantiate(baseEnemyObject, motion.location, new Quaternion());
         var movement = enemy.GetComponent<EnemyMovement>();
         movement.Init(player);
-        var typeManager = enemy.GetComponent<EnemyTypeManager>();
-        UnityEngine.Debug.Assert(typeManager != null);
-        typeManager.SetEnemyType(enemyIndex);
+        var enemyTypeManager = enemy.GetComponent<EnemyTypeManager>();
+        enemyTypeManager.Init(baseEnemyObject);
         return enemy;
     }
 }
