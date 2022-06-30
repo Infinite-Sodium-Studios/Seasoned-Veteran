@@ -47,4 +47,14 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
             var respawnedObject = spawner.Respawn(enemyObject, new SpawnMotion(spawnLocation, gameObject.transform.forward));
         }
     }
+
+    public int InitialHealth()
+    {
+        return initialHealth;
+    }
+
+    public int CurrentHealth()
+    {
+        return currentHealth;
+    }
 }
