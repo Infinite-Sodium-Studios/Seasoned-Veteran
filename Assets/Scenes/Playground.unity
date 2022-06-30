@@ -3480,7 +3480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
-    damage: 25
+    damage: 20
     msBetweenHitscanShots: 20
     hitscanRange: 3
     hitscanPrefab: {fileID: 5143731085917890517, guid: 8976055234abd3242a068d6a4cdd69b2,
@@ -3739,8 +3739,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
-    damage: 34
-    msBetweenHitscanShots: 500
+    damage: 100
+    msBetweenHitscanShots: 1500
     hitscanRange: 3000
     hitscanPrefab: {fileID: 5143731085917890517, guid: ae89d0c8f1dbc034785ae8f284838e23,
       type: 3}
