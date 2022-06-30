@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.AI;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 
 public class ProjectileBehavior : MonoBehaviour
@@ -42,8 +41,14 @@ public class ProjectileBehavior : MonoBehaviour
         else
         {
             NonExplosiveCollision(collision);
-
         }
+    }
+
+    int DamageWithFalloffCallback(int baseDamage, float distance)
+    {
+        float damageScale = 1f - distance / explosionParameters.explosionRadius;
+        float damage = baseDamage * Mathf.Clamp01(damageScale);
+        return Convert.ToInt32(Math.Ceiling(damage));
     }
 
     void NonExplosiveCollision(Collision collision)
@@ -59,7 +64,7 @@ public class ProjectileBehavior : MonoBehaviour
     {
         var contacts = new ContactPoint[collision.contactCount];
         int numContacts = collision.GetContacts(contacts);
-        var hitObjectIds = new Dictionary<int, GameObject>();
+        var minDistanceForObject = new Dictionary<GameObject, float>();
         foreach (var contact in contacts)
         {
             Instantiate(explosionParameters.explosionPrefab, contact.point, new Quaternion());
@@ -71,14 +76,22 @@ public class ProjectileBehavior : MonoBehaviour
                 {
                     continue;
                 }
-                hitObjectIds[currGameObject.GetInstanceID()] = currGameObject;
+                Vector3 closestPointOnObject = collider.ClosestPointOnBounds(contact.point);
+                float distance = Vector3.Distance(closestPointOnObject, contact.point);
+                if (!minDistanceForObject.ContainsKey(currGameObject))
+                {
+                    minDistanceForObject[currGameObject] = float.PositiveInfinity;
+                }
+                minDistanceForObject[currGameObject] = Math.Min(minDistanceForObject[currGameObject], distance);
             }
         }
-        foreach (var (id, currGameObject) in hitObjectIds)
+        foreach (var (currGameObject, distance) in minDistanceForObject)
         {
             if (currGameObject.TryGetComponent<IHittable>(out var hittable))
             {
-                hittable.HitEvent(gameObject, weaponStats);
+                int actualDamage = DamageWithFalloffCallback(explosionParameters.damage, distance);
+                var weaponStatsWithFalloff = weaponStats.WithDamage(actualDamage);
+                hittable.HitEvent(gameObject, weaponStatsWithFalloff);
             }
 
         }

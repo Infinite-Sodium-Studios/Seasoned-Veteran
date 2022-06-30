@@ -16,6 +16,18 @@ public class WeaponStats
         hittableEnemies = _hittableEnemies;
         damage = _damage;
     }
+    public WeaponStats(WeaponStats other)
+    {
+        hittableEnemies = other.hittableEnemies;
+        damage = other.damage;
+    }
+
+    public WeaponStats WithDamage(int damage)
+    {
+        WeaponStats weaponStats = new WeaponStats(this);
+        weaponStats.damage = damage;
+        return weaponStats;
+    }
 
     public bool CanHitEnemy(GameObject enemyObject)
     {
