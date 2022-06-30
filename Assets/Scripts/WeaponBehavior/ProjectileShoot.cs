@@ -20,7 +20,6 @@ public class ProjectileShoot : BaseWeapon
         var projectile = Object.Instantiate(projectilePrefab, outOfWorldPosition, new Quaternion());
 
         Physics.IgnoreCollision(projectile.GetComponent<Collider>(), shooter.GetComponent<Collider>());
-        Debug.Log("Ignore between " + projectile.name + " and " + shooter.name);
 
         var projectileBehavior = projectile.GetComponent<ProjectileBehavior>();
         projectileBehavior.Init(projectileSpeed, weaponStats, explosionParameters);

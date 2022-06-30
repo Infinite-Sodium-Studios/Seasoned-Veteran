@@ -33,7 +33,6 @@ public class ProjectileBehavior : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Projectile " + gameObject + " just hit " + collision.gameObject);
         bool isExplosive = explosionParameters.explosionPrefab != null;
         if (isExplosive)
         {
@@ -63,7 +62,6 @@ public class ProjectileBehavior : MonoBehaviour
         var hitObjectIds = new Dictionary<int, GameObject>();
         foreach (var contact in contacts)
         {
-            Debug.Log("Explosion Contact at " + contact.point);
             Instantiate(explosionParameters.explosionPrefab, contact.point, new Quaternion());
             var overlappingColliders = Physics.OverlapSphere(contact.point, explosionParameters.explosionRadius);
             foreach (var collider in overlappingColliders)
