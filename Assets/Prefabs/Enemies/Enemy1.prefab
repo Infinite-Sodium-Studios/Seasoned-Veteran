@@ -12,10 +12,20 @@ PrefabInstance:
       propertyPath: initialHealth
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4116132945306157909, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4930267865431901068, guid: 557e44f25c798984889ff7b334e81ac7,
         type: 3}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240014990978492875, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5716521887543533430, guid: 557e44f25c798984889ff7b334e81ac7,
         type: 3}
@@ -72,6 +82,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5978267952725375803, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978267952725375803, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978267952725375803, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978267952725375803, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6268522244322089666, guid: 557e44f25c798984889ff7b334e81ac7,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -86,6 +116,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882603770142837422, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882603770142837422, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: enemyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 557e44f25c798984889ff7b334e81ac7, type: 3}
