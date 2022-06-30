@@ -176,12 +176,12 @@ MonoBehaviour:
     projectilePrefab: {fileID: 7739884772350347285, guid: 355608b132d90e442962ae7286959704,
       type: 3}
     projectileWeaponModel: {fileID: 1024725104}
-    hittableEnemyTypes: 01000000
+    hittableEnemyTypes:
+    - {fileID: 4655971997202474437, guid: 9bc0dabf3e9e57b4db96e22f9fca06ba, type: 3}
     explosionParameters:
       explosionPrefab: {fileID: 6973167910681015815, guid: 75a469d4c8d40574e96277c6744973f2,
         type: 3}
       explosionRadius: 4
-      explosionStrength: 100
 --- !u!1 &88653530
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,11 +3082,11 @@ MonoBehaviour:
     projectilePrefab: {fileID: 7739884772350347285, guid: 06c6f2b6c12ebfa4691c5122501e41c5,
       type: 3}
     projectileWeaponModel: {fileID: 800097786}
-    hittableEnemyTypes: 03000000
+    hittableEnemyTypes:
+    - {fileID: 4655971997202474437, guid: b5db256f61fd4e441b77c7c9da231e0b, type: 3}
     explosionParameters:
       explosionPrefab: {fileID: 0}
       explosionRadius: 0
-      explosionStrength: 0
 --- !u!1 &1535674838
 GameObject:
   m_ObjectHideFlags: 0
@@ -3483,7 +3483,8 @@ MonoBehaviour:
     hitscanPrefab: {fileID: 5143731085917890517, guid: 8976055234abd3242a068d6a4cdd69b2,
       type: 3}
     hitscanWeaponModel: {fileID: 1788728031}
-    hittableEnemyTypes: 02000000
+    hittableEnemyTypes:
+    - {fileID: 4655971997202474437, guid: 02f26faa5a086e043b910b916dac6654, type: 3}
 --- !u!1 &1788728031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ee290c88843d2c49be639ef4dea8a73,
@@ -3740,7 +3741,8 @@ MonoBehaviour:
     hitscanPrefab: {fileID: 5143731085917890517, guid: ae89d0c8f1dbc034785ae8f284838e23,
       type: 3}
     hitscanWeaponModel: {fileID: 1489496447}
-    hittableEnemyTypes: 00000000
+    hittableEnemyTypes:
+    - {fileID: 4655971997202474437, guid: 810aabb30f3262c42a101829f035d964, type: 3}
 --- !u!1001 &1979352518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4374,7 +4376,7 @@ PrefabInstance:
     - target: {fileID: 8345070699079395522, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8345070699079395522, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
@@ -4384,7 +4386,7 @@ PrefabInstance:
     - target: {fileID: 8345070699079395522, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.215
       objectReference: {fileID: 0}
     - target: {fileID: 8345070699079395522, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
@@ -4466,7 +4468,7 @@ PrefabInstance:
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.375
+      value: 1.587
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74,
         type: 3}
@@ -5213,7 +5215,7 @@ Transform:
   - {fileID: 542508512}
   - {fileID: 874605736}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2114283754330233424
 GameObject:
@@ -8632,7 +8634,7 @@ PrefabInstance:
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.212
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
@@ -9080,7 +9082,7 @@ PrefabInstance:
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.375
+      value: 1.587
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
