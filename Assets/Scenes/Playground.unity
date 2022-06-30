@@ -179,6 +179,7 @@ MonoBehaviour:
     hittableEnemyTypes:
     - {fileID: 4655971997202474437, guid: 9bc0dabf3e9e57b4db96e22f9fca06ba, type: 3}
     explosionParameters:
+      damage: 50
       explosionPrefab: {fileID: 6973167910681015815, guid: 75a469d4c8d40574e96277c6744973f2,
         type: 3}
       explosionRadius: 4
@@ -3085,6 +3086,7 @@ MonoBehaviour:
     hittableEnemyTypes:
     - {fileID: 4655971997202474437, guid: b5db256f61fd4e441b77c7c9da231e0b, type: 3}
     explosionParameters:
+      damage: 34
       explosionPrefab: {fileID: 0}
       explosionRadius: 0
 --- !u!1 &1535674838
@@ -3478,6 +3480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
+    damage: 25
     msBetweenHitscanShots: 20
     hitscanRange: 3
     hitscanPrefab: {fileID: 5143731085917890517, guid: 8976055234abd3242a068d6a4cdd69b2,
@@ -3736,6 +3739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
+    damage: 34
     msBetweenHitscanShots: 500
     hitscanRange: 3000
     hitscanPrefab: {fileID: 5143731085917890517, guid: ae89d0c8f1dbc034785ae8f284838e23,

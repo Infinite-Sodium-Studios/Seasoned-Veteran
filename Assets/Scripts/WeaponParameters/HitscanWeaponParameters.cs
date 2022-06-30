@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class HitscanWeaponParameters : IWeaponParameters
 {
-
+    public int damage;
     public float msBetweenHitscanShots;
     public float hitscanRange;
     public GameObject hitscanPrefab;
@@ -13,7 +13,8 @@ public class HitscanWeaponParameters : IWeaponParameters
 
     public BaseWeapon ToBaseWeapon()
     {
-        return new HitscanShoot(msBetweenHitscanShots, hitscanRange, new WeaponStats(hittableEnemyTypes), hitscanPrefab);
+        var weaponStats = new WeaponStats(hittableEnemyTypes, damage);
+        return new HitscanShoot(msBetweenHitscanShots, hitscanRange, weaponStats, hitscanPrefab);
     }
 
     public GameObject GetWeaponModel()

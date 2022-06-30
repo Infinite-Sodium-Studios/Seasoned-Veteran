@@ -4,14 +4,17 @@ using System.Collections.Generic;
 public class WeaponStats
 {
     private List<GameObject> hittableEnemies;
+    private int damage;
 
     public WeaponStats()
     {
         hittableEnemies = new List<GameObject>();
+        damage = 0;
     }
-    public WeaponStats(List<GameObject> _hittableEnemies)
+    public WeaponStats(List<GameObject> _hittableEnemies, int _damage)
     {
         hittableEnemies = _hittableEnemies;
+        damage = _damage;
     }
 
     public bool CanHitEnemy(GameObject enemyObject)
@@ -28,5 +31,10 @@ public class WeaponStats
             }
         }
         return false;
+    }
+
+    public int DamageToEnemy(GameObject enemyObject)
+    {
+        return damage;
     }
 }

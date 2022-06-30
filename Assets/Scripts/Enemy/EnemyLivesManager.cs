@@ -30,7 +30,7 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         }
         if (weaponStats.CanHitEnemy(enemyObject))
         {
-            currentHealth--;
+            currentHealth -= weaponStats.DamageToEnemy(enemyObject);
             if (currentHealth <= 0)
             {
                 Debug.Log("Destroyed by " + hitter.name);
