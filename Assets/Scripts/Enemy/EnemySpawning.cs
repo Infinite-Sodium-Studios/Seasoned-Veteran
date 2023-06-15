@@ -26,13 +26,15 @@ public class EnemySpawning : MonoBehaviour
     private Stopwatch stopwatch;
     private GameObject player;
     private GameObject[] respawnPoints;
+    private GameObject[] targetPoints;
     private long msSinceLastSpawn;
-    readonly private long respawnFrequencyMs = 2_000;
+    [SerializeField] private long respawnFrequencyMs;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
+        targetPoints = GameObject.FindGameObjectsWithTag("Target");
         stopwatch = new Stopwatch();
         msSinceLastSpawn = 0;
     }
@@ -63,7 +65,9 @@ public class EnemySpawning : MonoBehaviour
     {
         var enemy = Instantiate(baseEnemyObject, motion.location, new Quaternion());
         var movement = enemy.GetComponent<EnemyMovement>();
-        movement.Init(player);
+        var targetIndex = Random.Range(0, targetPoints.Length);
+        var target = targetPoints[targetIndex];
+        movement.Init(target);
         var enemyTypeManager = enemy.GetComponent<EnemyTypeManager>();
         enemyTypeManager.Init(baseEnemyObject);
         return enemy;

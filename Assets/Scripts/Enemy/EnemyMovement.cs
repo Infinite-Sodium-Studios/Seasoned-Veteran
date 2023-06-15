@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private GameObject player;
+    private GameObject target;
     readonly private float speed = 3.0f;
 
     void Start()
@@ -13,15 +13,15 @@ public class EnemyMovement : MonoBehaviour
         agent.speed = speed;
     }
 
-    public void Init(GameObject playerRef)
+    public void Init(GameObject targetRef)
     {
-        player = playerRef;
+        target = targetRef;
     }
 
     void FixedUpdate()
     {
         Debug.Assert(agent != null, "Agent cannot be null");
-        Debug.Assert(player != null, "Player cannot be null");
-        agent.destination = player.transform.position;
+        Debug.Assert(target != null, "Target cannot be null");
+        agent.destination = target.transform.position;
     }
 }
