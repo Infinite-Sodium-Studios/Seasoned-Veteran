@@ -1960,6 +1960,7 @@ MonoBehaviour:
     damage: 20
     msBetweenHitscanShots: 20
     hitscanRange: 3
+    hitscanVisualizeRange: 0
     hitscanPrefab: {fileID: 5143731085917890517, guid: 8976055234abd3242a068d6a4cdd69b2,
       type: 3}
     hitscanWeaponModel: {fileID: 0}
@@ -2297,6 +2298,7 @@ MonoBehaviour:
     damage: 100
     msBetweenHitscanShots: 1500
     hitscanRange: 3000
+    hitscanVisualizeRange: 0
     hitscanPrefab: {fileID: 5143731085917890517, guid: ae89d0c8f1dbc034785ae8f284838e23,
       type: 3}
     hitscanWeaponModel: {fileID: 0}
@@ -2476,7 +2478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 675.3, y: -483.9}
+  m_AnchoredPosition: {x: 638.4, y: -483.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078828995
