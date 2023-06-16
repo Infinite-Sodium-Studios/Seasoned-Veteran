@@ -1237,7 +1237,7 @@ PrefabInstance:
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
       propertyPath: movementParameters.friction
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
@@ -1252,22 +1252,22 @@ PrefabInstance:
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
       propertyPath: movementParameters.air_accelerate
-      value: 1
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
       propertyPath: movementParameters.max_velocity_air
-      value: 100
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
       propertyPath: movementParameters.ground_accelerate
-      value: 10
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
       propertyPath: movementParameters.max_velocity_ground
-      value: 100
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}

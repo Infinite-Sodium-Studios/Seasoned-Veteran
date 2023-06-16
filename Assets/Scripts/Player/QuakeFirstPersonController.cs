@@ -135,15 +135,43 @@ public class QuakeFirstPersonController : MonoBehaviour
 			return Vector3.zero;
 		}
 		var motion = playerOrientation.right * inputMove.x + playerOrientation.forward * inputMove.y;
+		Debug.Assert(Mathf.Abs(motion.y) < 0.1, "motion is flat");
 		return motion.normalized;
+	}
+
+	private static Vector3 friction(Vector3 vel, float frictionCoeff, float timeFrame) {
+		if (vel.magnitude < 0.1f)
+		{
+			return Vector3.zero;
+		}
+		var speed = vel.magnitude;
+		var drop = speed * frictionCoeff * timeFrame;
+		var scaled = vel * Mathf.Max(speed - drop, 0) / speed;
+		return scaled;
+	}
+
+	private static Vector3 accelerate(Vector3 wishDir, Vector3 vel, float accel, float maxSpeed, float timeFrame) {
+		var currentSpeed = Vector3.Dot(vel, wishDir);
+		var addSpeed = Mathf.Clamp(maxSpeed - currentSpeed, 0, accel * timeFrame);
+		var accelerated = vel + wishDir * addSpeed;
+		return accelerated;
 	}
 
 	private void Move()
 	{
-		Vector2 inputMove = _input.move;
-		Vector3 wishDir = CalculateWishDir(inputMove, transform);
-		_speed = movementParameters.baseSpeed;
-		_controller.Move(wishDir * (_speed * Time.deltaTime));
+		var inputMove = _input.move;
+		var wishDir = CalculateWishDir(inputMove, transform);
+		var vel = _controller.velocity;
+		var timeFrame = Time.deltaTime;
+
+		var newVel = new Vector3(vel.x, 0, vel.z);
+		newVel = friction(newVel, movementParameters.friction, timeFrame);
+		newVel = accelerate(wishDir, newVel, movementParameters.ground_accelerate, movementParameters.max_velocity_ground, timeFrame);
+		Debug.Log("Wishdir = " + wishDir + " Prev = " + vel + " New = " + newVel);
+		Debug.Assert(Mathf.Abs(wishDir.y) < 0.1, "wish dir is flat");
+		Debug.Assert(Mathf.Abs(newVel.y) < 0.1, "new vel is flat");
+		_speed = newVel.magnitude;
+		_controller.Move(newVel * timeFrame);
 	}
 
 	private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
