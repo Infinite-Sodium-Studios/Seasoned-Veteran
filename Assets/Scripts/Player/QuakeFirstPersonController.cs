@@ -11,30 +11,13 @@ using StarterAssets;
 public class QuakeFirstPersonController : MonoBehaviour
 {
 	[Header("Player")]
-	[Tooltip("Move speed of the character in m/s")]
-	public float MoveSpeed = 10.0f;
+	[SerializeField] private MovementParameters movementParameters;
 	[Tooltip("Rotation speed of the character")]
 	public float RotationSpeed = 1.0f;
-	[Tooltip("Ground Acceleration and deceleration")]
-	public float GroundAccelerate = 10.0f;
-	[Tooltip("Air Acceleration and deceleration")]
-	public float AirAccelerate = 1.0f;
-	[Tooltip("Ground Max Velocity")]
-	public float GroundMaxVelocity = 100.0f;
-	[Tooltip("Air Max Velocity")]
-	public float AirMaxVelocity = 100.0f;
-	[Tooltip("Friction for movement")]
-	public float Friction = 5.0f;
-
-	[Space(10)]
-	[Tooltip("The height the player can jump")]
-	public float JumpHeight = 1.2f;
-	[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-	public float Gravity = -15.0f;
 
 	[Space(10)]
 	[Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-	public float JumpTimeout = 0.1f;
+	public float JumpTimeout = 0.0f;
 	[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
 	public float FallTimeout = 0.15f;
 
@@ -146,29 +129,7 @@ public class QuakeFirstPersonController : MonoBehaviour
 		}
 	}
 
-	private MovementParameters GetMovementParameters() {
-		return new MovementParameters{
-			air_accelerate = AirAccelerate,
-			max_velocity_air = AirMaxVelocity, 
-			ground_accelerate = GroundAccelerate, 
-			max_velocity_ground = GroundMaxVelocity, 
-			friction = Friction,
-		};
-	}
-
-	private static float CalculateNewSpeed(bool isGrounded, Vector3 desiredVelocity, Vector3 prevVelocity, MovementParameters parameters) {
-		prevVelocity = new Vector3(prevVelocity.x, 0.0f, prevVelocity.z);
-		desiredVelocity = new Vector3(desiredVelocity.x, 0.0f, desiredVelocity.z);
-		Vector3 newVelocity;
-		if (isGrounded) {
-			newVelocity = MovementUtils.MoveGround(desiredVelocity, prevVelocity, parameters);
-		} else {
-			newVelocity = MovementUtils.MoveAir(desiredVelocity, prevVelocity, parameters);
-		}
-		return newVelocity.magnitude;
-	}
-
-	private static Vector3 CalculateNormalizedMotion(Vector2 inputMove, Transform playerOrientation) {
+	private static Vector3 CalculateWishDir(Vector2 inputMove, Transform playerOrientation) {
 		if (inputMove == Vector2.zero)
 		{
 			return Vector3.zero;
@@ -177,75 +138,12 @@ public class QuakeFirstPersonController : MonoBehaviour
 		return motion.normalized;
 	}
 
-	private static Vector3 FindTargetVelocity(Vector2 inputMove, Transform playerOrientation, float defaultMoveSpeed) {
-		if (inputMove == Vector2.zero) {
-			return Vector3.zero;
-		}
-		var normalizedMotion = CalculateNormalizedMotion(inputMove, playerOrientation);
-		var scaledMotion = normalizedMotion * defaultMoveSpeed;
-		return scaledMotion;
-	}
-
 	private void Move()
 	{
-		JumpAndGravity();
-		Vector3 targetVelocity = FindTargetVelocity(_input.move, transform, MoveSpeed);
-		Vector3 prevVelocity = _controller.velocity;
 		Vector2 inputMove = _input.move;
-		Vector3 normalizedMotion = CalculateNormalizedMotion(inputMove, transform);
-
-		Debug.Log("Target vel " + targetVelocity + " prev vel " + prevVelocity + " input move " + inputMove);
-
-		_speed = CalculateNewSpeed(Grounded, targetVelocity, prevVelocity, GetMovementParameters());
-		_controller.Move(normalizedMotion * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-	}
-
-	private void JumpAndGravity()
-	{
-		if (Grounded)
-		{
-			// reset the fall timeout timer
-			_fallTimeoutDelta = FallTimeout;
-
-			// stop our velocity dropping infinitely when grounded
-			if (_verticalVelocity < 0.0f)
-			{
-				_verticalVelocity = -2f;
-			}
-
-			// Jump
-			if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-			{
-				// the square root of H * -2 * G = how much velocity needed to reach desired height
-				_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-			}
-
-			// jump timeout
-			if (_jumpTimeoutDelta >= 0.0f)
-			{
-				_jumpTimeoutDelta -= Time.deltaTime;
-			}
-		}
-		else
-		{
-			// reset the jump timeout timer
-			_jumpTimeoutDelta = JumpTimeout;
-
-			// fall timeout
-			if (_fallTimeoutDelta >= 0.0f)
-			{
-				_fallTimeoutDelta -= Time.deltaTime;
-			}
-
-			// if we are not grounded, do not jump
-			_input.jump = false;
-		}
-
-		// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-		if (_verticalVelocity < _terminalVelocity)
-		{
-			_verticalVelocity += Gravity * Time.deltaTime;
-		}
+		Vector3 wishDir = CalculateWishDir(inputMove, transform);
+		_speed = movementParameters.baseSpeed;
+		_controller.Move(wishDir * (_speed * Time.deltaTime));
 	}
 
 	private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
