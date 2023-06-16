@@ -1251,6 +1251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
+      propertyPath: movementParameters.maxSpeedAir
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
+        type: 3}
       propertyPath: movementParameters.air_accelerate
       value: 60
       objectReference: {fileID: 0}
