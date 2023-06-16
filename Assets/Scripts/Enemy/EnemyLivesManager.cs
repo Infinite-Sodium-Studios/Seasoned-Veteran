@@ -19,32 +19,22 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
 
     public void HitEvent(GameObject hitter, WeaponStats weaponStats)
     {
-        if (hitter.tag == "Enemy")
+        if (hitter.tag == "Enemy" || enemyObject == null)
         {
+            return;
+        }
+        if (!weaponStats.CanHitEnemy(enemyObject))
+        {
+            Debug.Log("Weapon could not damage enemy!");
             return;
         }
 
-        if (enemyObject == null)
+        currentHealth -= weaponStats.DamageToEnemy(enemyObject);
+        if (currentHealth <= 0)
         {
-            return;
-        }
-        if (weaponStats.CanHitEnemy(enemyObject))
-        {
-            currentHealth -= weaponStats.DamageToEnemy(enemyObject);
-            if (currentHealth <= 0)
-            {
-                Debug.Log("Destroyed by " + hitter.name);
-                playerScoreManager.OnEnemyKill();
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            Debug.Log("Doubled!");
-            var collider = gameObject.GetComponent<Collider>();
-            var sizeRight = 1.5f * collider.bounds.size.x;
-            Vector3 spawnLocation = gameObject.transform.position + Vector3.right * sizeRight;
-            var respawnedObject = spawner.Respawn(enemyObject, new SpawnMotion(spawnLocation, gameObject.transform.forward));
+            Debug.Log("Destroyed by " + hitter.name);
+            playerScoreManager.OnEnemyKill();
+            Destroy(gameObject);
         }
     }
 
