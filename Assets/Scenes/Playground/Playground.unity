@@ -179,7 +179,7 @@ MonoBehaviour:
     hittableEnemyTypes:
     - {fileID: 4655971997202474437, guid: 9bc0dabf3e9e57b4db96e22f9fca06ba, type: 3}
     explosionParameters:
-      damage: 50
+      damage: 100
       explosionPrefab: {fileID: 6973167910681015815, guid: 75a469d4c8d40574e96277c6744973f2,
         type: 3}
       explosionRadius: 4
@@ -1186,6 +1186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 399275501}
   - component: {fileID: 399275502}
+  - component: {fileID: 399275503}
   m_Layer: 0
   m_Name: GameManagerObject
   m_TagString: Untagged
@@ -1221,6 +1222,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverTextObject: {fileID: 1647674717}
+--- !u!114 &399275503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399275500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c58aeea17687a459f571e6a53ff342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAllowedEscapedEnemies: 4
 --- !u!1 &522897242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,7 +1426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c9d47ffae1b54db993098a292dad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreManager: {fileID: 135756641613574998}
+  playerScoreManager: {fileID: 399275503}
   baseText: 'Lives: '
   textElement: {fileID: 522897244}
 --- !u!1 &542508511
@@ -2773,7 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc66e19b9292cd745b620981f17b8c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreManager: {fileID: 135756641613574998}
+  playerScoreManager: {fileID: 399275503}
   baseText: 'Score: '
   textElement: {fileID: 1116115050}
 --- !u!23 &1116115052
@@ -2900,6 +2914,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6300110015908439031, guid: 928e0fad985a8da4787ce09875f66427,
     type: 3}
   m_PrefabInstance: {fileID: 1149129058}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1388185790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4135013735270702863, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    type: 3}
+  m_PrefabInstance: {fileID: 5393215579111688471}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1395133198
 GameObject:
@@ -3603,7 +3623,8 @@ MonoBehaviour:
   parameters:
     damage: 20
     msBetweenHitscanShots: 20
-    hitscanRange: 3
+    hitscanRange: 8
+    hitscanVisualizeRange: 5.5
     hitscanPrefab: {fileID: 5143731085917890517, guid: 8976055234abd3242a068d6a4cdd69b2,
       type: 3}
     hitscanWeaponModel: {fileID: 1788728031}
@@ -3756,7 +3777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d879cabe1dd569e438471e6573518fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreManager: {fileID: 135756641613574998}
+  playerScoreManager: {fileID: 399275503}
   baseText: 'Time: '
   textElement: {fileID: 1797545850}
 --- !u!23 &1797545852
@@ -3953,6 +3974,7 @@ MonoBehaviour:
     damage: 100
     msBetweenHitscanShots: 1500
     hitscanRange: 3000
+    hitscanVisualizeRange: 0.5
     hitscanPrefab: {fileID: 5143731085917890517, guid: ae89d0c8f1dbc034785ae8f284838e23,
       type: 3}
     hitscanWeaponModel: {fileID: 1489496447}
@@ -4844,19 +4866,6 @@ MonoBehaviour:
   - {fileID: 39842653}
   - {fileID: 1780481269}
   - {fileID: 1531226205}
---- !u!114 &135756641613574998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827724038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c58aeea17687a459f571e6a53ff342, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAllowedEscapedEnemies: 3
 --- !u!23 &140384132869412242
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8833,25 +8842,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    - target: {fileID: 5637688727753742973, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
-      propertyPath: Gravity
-      value: -30
+      propertyPath: CinemachineCameraTarget
+      value: 
+      objectReference: {fileID: 1388185790}
+    - target: {fileID: 5637688727753742973, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+        type: 3}
+      propertyPath: movementParameters.friction
+      value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    - target: {fileID: 5637688727753742973, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
-      propertyPath: MoveSpeed
-      value: 5
+      propertyPath: movementParameters.maxSpeedAir
+      value: 1.2
       objectReference: {fileID: 0}
-    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    - target: {fileID: 5637688727753742973, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
-      propertyPath: JumpHeight
-      value: 2
+      propertyPath: movementParameters.maxSpeedGround
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    - target: {fileID: 5637688727753742973, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
-      propertyPath: SprintSpeed
-      value: 10
+      propertyPath: movementParameters.airAcceleration
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637688727753742973, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+        type: 3}
+      propertyPath: movementParameters.groundAcceleration
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
@@ -8913,8 +8932,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -1878766409791888175, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!4 &5401189798212705773
 Transform:

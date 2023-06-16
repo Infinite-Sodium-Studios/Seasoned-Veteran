@@ -7,7 +7,7 @@ public class EnemyTargetCollision : MonoBehaviour
 
     void Start()
     {
-        playerScoreManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScoreManager>();
+        playerScoreManager = GameObject.Find("GameManagerObject").GetComponent<PlayerScoreManager>();
     }
 
     void OnTriggerEnter(Collider collider)

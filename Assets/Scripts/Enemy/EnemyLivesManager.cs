@@ -14,7 +14,7 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         currentHealth = initialHealth;
         spawner = GameObject.Find("EnemySpawnObject").GetComponent<EnemySpawning>();
         enemyObject = gameObject;
-        playerScoreManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScoreManager>();
+        playerScoreManager = GameObject.Find("GameManagerObject").GetComponent<PlayerScoreManager>();
     }
 
     public void HitEvent(GameObject hitter, WeaponStats weaponStats)

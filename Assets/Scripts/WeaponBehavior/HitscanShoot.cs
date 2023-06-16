@@ -3,12 +3,14 @@ using UnityEngine;
 public class HitscanShoot : BaseWeapon
 {
     private float maxRange;
+    private float visualizeRange;
     private EventRateLimiter rateLimiter;
     GameObject hitscanPrefab;
 
-    public HitscanShoot(float _minMsBetweenShots, float _maxRange, WeaponStats _weaponStats, GameObject _hitscanPrefab) : base(_minMsBetweenShots, _weaponStats)
+    public HitscanShoot(float _minMsBetweenShots, float _maxRange, float _visualizeRange, WeaponStats _weaponStats, GameObject _hitscanPrefab) : base(_minMsBetweenShots, _weaponStats)
     {
         maxRange = _maxRange;
+        visualizeRange = _visualizeRange;
         hitscanPrefab = _hitscanPrefab;
     }
 
@@ -33,7 +35,7 @@ public class HitscanShoot : BaseWeapon
     void VisualizeRing(Vector3 origin)
     {
         const float radius = 0.03f;
-        const float forwardOffset = 0.5f;
+        float forwardOffset = visualizeRange;
         const int samples = 128;
         const float surviveTime = 0.1f;
         for (int iter = 0; iter < samples; iter++)
