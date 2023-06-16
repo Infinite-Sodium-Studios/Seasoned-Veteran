@@ -4856,7 +4856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c58aeea17687a459f571e6a53ff342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAllowedEscapedEnemies: 5
+  maxAllowedEscapedEnemies: 3
 --- !u!23 &140384132869412242
 MeshRenderer:
   m_ObjectHideFlags: 0
