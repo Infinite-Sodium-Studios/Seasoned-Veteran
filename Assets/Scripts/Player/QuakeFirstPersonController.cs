@@ -141,56 +141,57 @@ public class QuakeFirstPersonController : MonoBehaviour
 		}
 	}
 
+	private static float FindTargetSpeed(Vector2 inputMove, float defaultMoveSpeed) {
+		// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+		if (inputMove == Vector2.zero) {
+			return 0.0f;
+		}
+		return defaultMoveSpeed;
+	}
+
+	private static float NewSpeedUsingOldMovementModel(Vector3 currentVelocity, float targetSpeed, float speedChangeRate) {
+		// a reference to the players current horizontal velocity
+		float currentHorizontalSpeed = new Vector3(currentVelocity.x, 0.0f, currentVelocity.z).magnitude;
+		float speedOffset = 0.1f;
+		// accelerate or decelerate to target speed
+		if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
+		{
+			// creates curved result rather than a linear one giving a more organic speed change
+			// note T in Lerp is clamped, so we don't need to clamp our speed
+			float speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
+
+			// round speed to 3 decimal places
+			speed = Mathf.Round(speed * 1000f) / 1000f;
+			return speed;
+		}
+		else
+		{
+			return targetSpeed;
+		}
+	}
+
+	private static float NewSpeedUsingNewMovementModel(Vector3 currentVelocity, float targetSpeed) {
+		return targetSpeed;
+	}
+
+	private static Vector3 CalculateMotion(Vector2 inputMove, Transform playerOrientation) {
+		if (inputMove == Vector2.zero)
+		{
+			return new Vector3(inputMove.x, 0.0f, inputMove.y);
+		}
+		return playerOrientation.right * inputMove.x + playerOrientation.forward * inputMove.y;
+	}
+
 	private void Move()
 	{
-		float targetSpeed = MoveSpeed;
+		float targetSpeed = FindTargetSpeed(_input.move, MoveSpeed);
+		Vector3 currentVelocity = _controller.velocity;
+		Vector2 inputMove = _input.move;
 
-		// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+		_speed = UseNewMovement ? NewSpeedUsingNewMovementModel(currentVelocity, targetSpeed) : NewSpeedUsingOldMovementModel(currentVelocity, targetSpeed, SpeedChangeRate);
 
-		// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-		// if there is no input, set the target speed to 0
-		if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
-
-		if (UseNewMovement) {
-			_speed = targetSpeed;
-		}
-		else {
-			// a reference to the players current horizontal velocity
-			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
-			float speedOffset = 0.1f;
-			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
-			// accelerate or decelerate to target speed
-			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
-			{
-				// creates curved result rather than a linear one giving a more organic speed change
-				// note T in Lerp is clamped, so we don't need to clamp our speed
-				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
-
-				// round speed to 3 decimal places
-				_speed = Mathf.Round(_speed * 1000f) / 1000f;
-			}
-			else
-			{
-				_speed = targetSpeed;
-			}
-		}
-
-		// normalise input direction
-		Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-		// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-		// if there is a move input rotate player when the player is moving
-		if (_input.move != Vector2.zero)
-		{
-			// move
-			inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
-		}
-
-		// move the player
-		_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+		Vector3 motion = CalculateMotion(inputMove, transform);
+		_controller.Move(motion.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 	}
 
 	private void JumpAndGravity()

@@ -1221,6 +1221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
         type: 3}
+      propertyPath: UseNewMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332514000290628145, guid: 240669586cdf43c4fabbeee81cd583fe,
+        type: 3}
       propertyPath: GroundLayers.m_Bits
       value: 513
       objectReference: {fileID: 0}
