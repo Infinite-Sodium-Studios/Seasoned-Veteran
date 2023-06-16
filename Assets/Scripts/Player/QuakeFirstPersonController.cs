@@ -108,7 +108,6 @@ public class QuakeFirstPersonController : MonoBehaviour
 
 	private void Update()
 	{
-		JumpAndGravity();
 		GroundedCheck();
 		Move();
 	}
@@ -172,7 +171,7 @@ public class QuakeFirstPersonController : MonoBehaviour
 	private static Vector3 CalculateNormalizedMotion(Vector2 inputMove, Transform playerOrientation) {
 		if (inputMove == Vector2.zero)
 		{
-			return new Vector3(inputMove.x, 0.0f, inputMove.y);
+			return Vector3.zero;
 		}
 		var motion = playerOrientation.right * inputMove.x + playerOrientation.forward * inputMove.y;
 		return motion.normalized;
@@ -180,7 +179,7 @@ public class QuakeFirstPersonController : MonoBehaviour
 
 	private static Vector3 FindTargetVelocity(Vector2 inputMove, Transform playerOrientation, float defaultMoveSpeed) {
 		if (inputMove == Vector2.zero) {
-			return new Vector3(0.0f, 0.0f, 0.0f);
+			return Vector3.zero;
 		}
 		var normalizedMotion = CalculateNormalizedMotion(inputMove, playerOrientation);
 		var scaledMotion = normalizedMotion * defaultMoveSpeed;
@@ -189,12 +188,13 @@ public class QuakeFirstPersonController : MonoBehaviour
 
 	private void Move()
 	{
+		JumpAndGravity();
 		Vector3 targetVelocity = FindTargetVelocity(_input.move, transform, MoveSpeed);
 		Vector3 prevVelocity = _controller.velocity;
 		Vector2 inputMove = _input.move;
 		Vector3 normalizedMotion = CalculateNormalizedMotion(inputMove, transform);
 
-		Debug.Log("Target vel " + targetVelocity + " prev vel " + prevVelocity);
+		Debug.Log("Target vel " + targetVelocity + " prev vel " + prevVelocity + " input move " + inputMove);
 
 		_speed = CalculateNewSpeed(Grounded, targetVelocity, prevVelocity, GetMovementParameters());
 		_controller.Move(normalizedMotion * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
