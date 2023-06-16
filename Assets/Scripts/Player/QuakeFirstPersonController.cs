@@ -15,12 +15,6 @@ public class QuakeFirstPersonController : MonoBehaviour
 	[Tooltip("Rotation speed of the character")]
 	public float RotationSpeed = 1.0f;
 
-	[Space(10)]
-	[Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-	public float JumpTimeout = 0.0f;
-	[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
-	public float FallTimeout = 0.15f;
-
 	[Header("Player Grounded")]
 	[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
 	public bool Grounded = true;
@@ -43,15 +37,9 @@ public class QuakeFirstPersonController : MonoBehaviour
 	private float _cinemachineTargetPitch;
 
 	// player
-	private float _speed;
-	private float _rotationVelocity;
-	private float _verticalVelocity;
-	private float _terminalVelocity = 53.0f;
-
-	// timeout deltatime
-	private float _jumpTimeoutDelta;
-	private float _fallTimeoutDelta;
-
+	private float _speed = 0f;
+	private float _rotationVelocity = 0f;
+	private float _verticalVelocity = 0f;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 	private PlayerInput _playerInput;
@@ -83,16 +71,13 @@ public class QuakeFirstPersonController : MonoBehaviour
 #else
 		Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
-		// reset our timeouts on start
-		_jumpTimeoutDelta = JumpTimeout;
-		_fallTimeoutDelta = FallTimeout;
 	}
 
 	private void Update()
 	{
 		GroundedCheck();
-		Move();
+		var (isGrounded, verticalSpeed) = Jump();
+		Move(isGrounded, verticalSpeed);
 	}
 
 	private void LateUpdate()
@@ -129,6 +114,23 @@ public class QuakeFirstPersonController : MonoBehaviour
 		}
 	}
 
+	private (bool, float) Jump() {
+		var isGrounded = Grounded;
+		var terminalVelocity = movementParameters.terminalVelocity;
+		var gravity = movementParameters.gravity;
+		var currentVerticalVelocity = _verticalVelocity;
+		var timeFrame = Time.deltaTime;
+		if (!isGrounded) {
+			var newVerticalVelocity = Mathf.Max(terminalVelocity, currentVerticalVelocity + gravity * timeFrame);
+			Debug.Log("Prev vertical velocity = " + currentVerticalVelocity + ", new vertical velocity = " + newVerticalVelocity);
+			return (false, newVerticalVelocity);
+		}
+		if (_input.jump) {
+			return (false, movementParameters.jumpHeight);
+		}
+		return (true, 0f);
+	}
+
 	private static Vector3 CalculateWishDir(Vector2 inputMove, Transform playerOrientation) {
 		if (inputMove == Vector2.zero)
 		{
@@ -157,21 +159,26 @@ public class QuakeFirstPersonController : MonoBehaviour
 		return accelerated;
 	}
 
-	private void Move()
+	private void Move(bool isGrounded, float verticalVelocity)
 	{
 		var inputMove = _input.move;
 		var wishDir = CalculateWishDir(inputMove, transform);
 		var vel = _controller.velocity;
 		var timeFrame = Time.deltaTime;
+		var acceleration = isGrounded ? movementParameters.groundAcceleration : movementParameters.airAcceleration;
+		var maxSpeed = isGrounded ? movementParameters.maxSpeedGround : movementParameters.maxSpeedAir;
 
 		var newVel = new Vector3(vel.x, 0, vel.z);
-		newVel = friction(newVel, movementParameters.friction, timeFrame);
-		newVel = accelerate(wishDir, newVel, movementParameters.ground_accelerate, movementParameters.max_velocity_ground, timeFrame);
-		Debug.Log("Wishdir = " + wishDir + " Prev = " + vel + " New = " + newVel);
+		if (isGrounded) {
+			newVel = friction(newVel, movementParameters.friction, timeFrame);
+		}
+		newVel = accelerate(wishDir, newVel, acceleration, maxSpeed, timeFrame);
 		Debug.Assert(Mathf.Abs(wishDir.y) < 0.1, "wish dir is flat");
 		Debug.Assert(Mathf.Abs(newVel.y) < 0.1, "new vel is flat");
+		var verticalVel = new Vector3(0, verticalVelocity, 0);
 		_speed = newVel.magnitude;
-		_controller.Move(newVel * timeFrame);
+		_verticalVelocity = verticalVelocity;
+		_controller.Move(newVel * timeFrame + verticalVel * timeFrame);
 	}
 
 	private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
