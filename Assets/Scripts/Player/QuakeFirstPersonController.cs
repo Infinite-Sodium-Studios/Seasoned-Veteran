@@ -251,6 +251,8 @@ public class QuakeFirstPersonController : MonoBehaviour
 
 	public float GetSpeed()
 	{
-		return _speed;
+		var velocity = _controller.velocity;
+		var horizontalVelocity = new Vector3(velocity.x, 0.0f, velocity.z);
+		return horizontalVelocity.magnitude;
 	}
 }
