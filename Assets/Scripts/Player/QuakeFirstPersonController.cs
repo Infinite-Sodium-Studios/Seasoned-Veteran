@@ -122,7 +122,6 @@ public class QuakeFirstPersonController : MonoBehaviour
 		var timeFrame = Time.deltaTime;
 		if (!isGrounded) {
 			var newVerticalVelocity = Mathf.Max(terminalVelocity, currentVerticalVelocity + gravity * timeFrame);
-			Debug.Log("Prev vertical velocity = " + currentVerticalVelocity + ", new vertical velocity = " + newVerticalVelocity);
 			return (false, newVerticalVelocity);
 		}
 		if (_input.jump) {
