@@ -7,6 +7,7 @@ public class HitscanWeaponParameters : IWeaponParameters
     public int damage;
     public float msBetweenHitscanShots;
     public float hitscanRange;
+    public float hitscanVisualizeRange;
     public GameObject hitscanPrefab;
     public GameObject hitscanWeaponModel;
     public List<GameObject> hittableEnemyTypes;
@@ -14,7 +15,7 @@ public class HitscanWeaponParameters : IWeaponParameters
     public BaseWeapon ToBaseWeapon()
     {
         var weaponStats = new WeaponStats(hittableEnemyTypes, damage);
-        return new HitscanShoot(msBetweenHitscanShots, hitscanRange, weaponStats, hitscanPrefab);
+        return new HitscanShoot(msBetweenHitscanShots, hitscanRange, hitscanVisualizeRange, weaponStats, hitscanPrefab);
     }
 
     public GameObject GetWeaponModel()

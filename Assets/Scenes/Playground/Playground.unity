@@ -3624,6 +3624,7 @@ MonoBehaviour:
     damage: 20
     msBetweenHitscanShots: 20
     hitscanRange: 8
+    hitscanVisualizeRange: 5.5
     hitscanPrefab: {fileID: 5143731085917890517, guid: 8976055234abd3242a068d6a4cdd69b2,
       type: 3}
     hitscanWeaponModel: {fileID: 1788728031}
@@ -3973,6 +3974,7 @@ MonoBehaviour:
     damage: 100
     msBetweenHitscanShots: 1500
     hitscanRange: 3000
+    hitscanVisualizeRange: 0.5
     hitscanPrefab: {fileID: 5143731085917890517, guid: ae89d0c8f1dbc034785ae8f284838e23,
       type: 3}
     hitscanWeaponModel: {fileID: 1489496447}
