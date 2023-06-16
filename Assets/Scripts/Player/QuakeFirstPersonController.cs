@@ -10,15 +10,21 @@ using StarterAssets;
 #endif
 public class QuakeFirstPersonController : MonoBehaviour
 {
-	public bool UseNewMovement = true;
-
 	[Header("Player")]
 	[Tooltip("Move speed of the character in m/s")]
 	public float MoveSpeed = 10.0f;
 	[Tooltip("Rotation speed of the character")]
 	public float RotationSpeed = 1.0f;
-	[Tooltip("Acceleration and deceleration")]
-	public float SpeedChangeRate = 10.0f;
+	[Tooltip("Ground Acceleration and deceleration")]
+	public float GroundAccelerate = 10.0f;
+	[Tooltip("Air Acceleration and deceleration")]
+	public float AirAccelerate = 1.0f;
+	[Tooltip("Ground Max Velocity")]
+	public float GroundMaxVelocity = 100.0f;
+	[Tooltip("Air Max Velocity")]
+	public float AirMaxVelocity = 100.0f;
+	[Tooltip("Friction for movement")]
+	public float Friction = 5.0f;
 
 	[Space(10)]
 	[Tooltip("The height the player can jump")]
@@ -141,57 +147,57 @@ public class QuakeFirstPersonController : MonoBehaviour
 		}
 	}
 
-	private static float FindTargetSpeed(Vector2 inputMove, float defaultMoveSpeed) {
-		// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-		if (inputMove == Vector2.zero) {
-			return 0.0f;
-		}
-		return defaultMoveSpeed;
+	private MovementParameters GetMovementParameters() {
+		return new MovementParameters{
+			air_accelerate = AirAccelerate,
+			max_velocity_air = AirMaxVelocity, 
+			ground_accelerate = GroundAccelerate, 
+			max_velocity_ground = GroundMaxVelocity, 
+			friction = Friction,
+		};
 	}
 
-	private static float NewSpeedUsingOldMovementModel(Vector3 currentVelocity, float targetSpeed, float speedChangeRate) {
-		// a reference to the players current horizontal velocity
-		float currentHorizontalSpeed = new Vector3(currentVelocity.x, 0.0f, currentVelocity.z).magnitude;
-		float speedOffset = 0.1f;
-		// accelerate or decelerate to target speed
-		if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
-		{
-			// creates curved result rather than a linear one giving a more organic speed change
-			// note T in Lerp is clamped, so we don't need to clamp our speed
-			float speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
-
-			// round speed to 3 decimal places
-			speed = Mathf.Round(speed * 1000f) / 1000f;
-			return speed;
+	private static float CalculateNewSpeed(bool isGrounded, Vector3 desiredVelocity, Vector3 prevVelocity, MovementParameters parameters) {
+		prevVelocity = new Vector3(prevVelocity.x, 0.0f, prevVelocity.z);
+		desiredVelocity = new Vector3(desiredVelocity.x, 0.0f, desiredVelocity.z);
+		Vector3 newVelocity;
+		if (isGrounded) {
+			newVelocity = MovementUtils.MoveGround(desiredVelocity, prevVelocity, parameters);
+		} else {
+			newVelocity = MovementUtils.MoveAir(desiredVelocity, prevVelocity, parameters);
 		}
-		else
-		{
-			return targetSpeed;
-		}
+		return newVelocity.magnitude;
 	}
 
-	private static float NewSpeedUsingNewMovementModel(Vector3 currentVelocity, float targetSpeed) {
-		return targetSpeed;
-	}
-
-	private static Vector3 CalculateMotion(Vector2 inputMove, Transform playerOrientation) {
+	private static Vector3 CalculateNormalizedMotion(Vector2 inputMove, Transform playerOrientation) {
 		if (inputMove == Vector2.zero)
 		{
 			return new Vector3(inputMove.x, 0.0f, inputMove.y);
 		}
-		return playerOrientation.right * inputMove.x + playerOrientation.forward * inputMove.y;
+		var motion = playerOrientation.right * inputMove.x + playerOrientation.forward * inputMove.y;
+		return motion.normalized;
+	}
+
+	private static Vector3 FindTargetVelocity(Vector2 inputMove, Transform playerOrientation, float defaultMoveSpeed) {
+		if (inputMove == Vector2.zero) {
+			return new Vector3(0.0f, 0.0f, 0.0f);
+		}
+		var normalizedMotion = CalculateNormalizedMotion(inputMove, playerOrientation);
+		var scaledMotion = normalizedMotion * defaultMoveSpeed;
+		return scaledMotion;
 	}
 
 	private void Move()
 	{
-		float targetSpeed = FindTargetSpeed(_input.move, MoveSpeed);
-		Vector3 currentVelocity = _controller.velocity;
+		Vector3 targetVelocity = FindTargetVelocity(_input.move, transform, MoveSpeed);
+		Vector3 prevVelocity = _controller.velocity;
 		Vector2 inputMove = _input.move;
+		Vector3 normalizedMotion = CalculateNormalizedMotion(inputMove, transform);
 
-		_speed = UseNewMovement ? NewSpeedUsingNewMovementModel(currentVelocity, targetSpeed) : NewSpeedUsingOldMovementModel(currentVelocity, targetSpeed, SpeedChangeRate);
+		Debug.Log("Target vel " + targetVelocity + " prev vel " + prevVelocity);
 
-		Vector3 motion = CalculateMotion(inputMove, transform);
-		_controller.Move(motion.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+		_speed = CalculateNewSpeed(Grounded, targetVelocity, prevVelocity, GetMovementParameters());
+		_controller.Move(normalizedMotion * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 	}
 
 	private void JumpAndGravity()
