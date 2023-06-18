@@ -7,6 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4587699974411451965, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: m_Speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587699974411451965, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587699974411451965, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: avoidancePriority
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5240014990978492875, guid: 557e44f25c798984889ff7b334e81ac7,
         type: 3}
       propertyPath: m_AnchorMax.x

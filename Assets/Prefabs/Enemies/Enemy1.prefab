@@ -12,6 +12,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4587699974411451965, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587699974411451965, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587699974411451965, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: m_AngularSpeed
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587699974411451965, guid: 557e44f25c798984889ff7b334e81ac7,
+        type: 3}
+      propertyPath: avoidancePriority
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 4930267865431901068, guid: 557e44f25c798984889ff7b334e81ac7,
         type: 3}
       propertyPath: m_IsKinematic

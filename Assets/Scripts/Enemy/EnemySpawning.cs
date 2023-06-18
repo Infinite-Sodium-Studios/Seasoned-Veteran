@@ -22,21 +22,23 @@ public struct SpawnMotion
 
 public class EnemySpawning : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
     private Stopwatch stopwatch;
     private GameObject player;
-    private GameObject[] respawnPoints;
-    private GameObject[] targetPoints;
     private long msSinceLastSpawn;
+    private int remainingEnemiesForWave;
+    private int spawnPointIndexForWave;
+    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject[] respawnPoints;
+    [SerializeField] private GameObject[] targetPoints;
     [SerializeField] private long respawnFrequencyMs;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
-        targetPoints = GameObject.FindGameObjectsWithTag("Target");
         stopwatch = new Stopwatch();
         msSinceLastSpawn = 0;
+        remainingEnemiesForWave = 0;
+        spawnPointIndexForWave = 0;
     }
 
     void FixedUpdate()
@@ -47,25 +49,42 @@ public class EnemySpawning : MonoBehaviour
 
         if (msSinceLastSpawn >= respawnFrequencyMs)
         {
-            var spawnIndex = Random.Range(0, respawnPoints.Length);
-            var respawnPoint = respawnPoints[spawnIndex];
-            var spawnedEnemy = Respawn(new SpawnMotion(respawnPoint.GetComponent<BoxCollider>()));
+            var spawnIndex = GetSpawnPointIndexForWave();
+            var spawnedEnemy = Respawn(spawnIndex);
             msSinceLastSpawn = 0;
         }
     }
 
-    public GameObject Respawn(SpawnMotion motion)
+    private static int GetNewSpawnPoint(int numRespawnPoints, int previousSpawnPointIndex) {
+        var newSpawnPointIndex = previousSpawnPointIndex;
+        while (newSpawnPointIndex == previousSpawnPointIndex && numRespawnPoints > 1) {
+            newSpawnPointIndex = Random.Range(0, numRespawnPoints);
+        }
+        return newSpawnPointIndex;
+    }
+
+    private int GetSpawnPointIndexForWave() {
+        if (remainingEnemiesForWave <= 0) {
+            spawnPointIndexForWave = GetNewSpawnPoint(respawnPoints.Length, spawnPointIndexForWave);
+            remainingEnemiesForWave = Random.Range(3, 5);
+        }
+        --remainingEnemiesForWave;
+        return spawnPointIndexForWave;
+    }
+
+    private GameObject Respawn(int spawnIndex)
     {
         var enemyIndex = Random.Range(0, enemyPrefabs.Length);
         var enemyPrefab = enemyPrefabs[enemyIndex];
-        return Respawn(enemyPrefab, motion);
+        return Respawn(enemyPrefab, spawnIndex);
     }
 
-    public GameObject Respawn(GameObject baseEnemyObject, SpawnMotion motion)
+    private GameObject Respawn(GameObject baseEnemyObject, int spawnIndex)
     {
+        var motion = new SpawnMotion(respawnPoints[spawnIndex].GetComponent<BoxCollider>());
         var enemy = Instantiate(baseEnemyObject, motion.location, new Quaternion());
         var movement = enemy.GetComponent<EnemyMovement>();
-        var targetIndex = Random.Range(0, targetPoints.Length);
+        var targetIndex = spawnIndex % targetPoints.Length;
         var target = targetPoints[targetIndex];
         movement.Init(target);
         var enemyTypeManager = enemy.GetComponent<EnemyTypeManager>();

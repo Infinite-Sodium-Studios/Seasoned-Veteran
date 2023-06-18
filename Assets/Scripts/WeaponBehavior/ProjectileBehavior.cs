@@ -24,10 +24,11 @@ public class ProjectileBehavior : MonoBehaviour
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         var position = ray.origin;
         var rotation = Camera.main.transform.rotation;
-        gameObject.transform.SetPositionAndRotation(position, rotation);
-
         var rigidBody = GetComponent<Rigidbody>();
-        rigidBody.AddForce(speed * rigidBody.transform.forward);
+        gameObject.transform.SetPositionAndRotation(position, rotation);
+        var forwardVector = rigidBody.transform.forward;
+        gameObject.transform.position += forwardVector * 2f; // move projectile forward so it doesn't block the player's view
+        rigidBody.AddForce(speed * forwardVector);
     }
 
     void OnCollisionEnter(Collision collision)

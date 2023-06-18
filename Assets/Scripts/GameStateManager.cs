@@ -9,6 +9,7 @@ public class GameStateManager : MonoBehaviour
     {
         gameEnded = false;
         gameOverTextObject.SetActive(false);
+        Cursor.visible = false;
     }
 
     public void GameOver()

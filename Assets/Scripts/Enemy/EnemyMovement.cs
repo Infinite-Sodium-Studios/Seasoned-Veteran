@@ -5,12 +5,10 @@ public class EnemyMovement : MonoBehaviour
 {
     private NavMeshAgent agent;
     private GameObject target;
-    readonly private float speed = 3.0f;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = speed;
     }
 
     public void Init(GameObject targetRef)
