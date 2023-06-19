@@ -3,13 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverTextObject;
+    [SerializeField] private GameObject gameOverCanvas;
     private bool gameEnded;
     void Start()
     {
         gameEnded = false;
-        gameOverTextObject.SetActive(false);
-        Cursor.visible = false;
+        gameOverCanvas.SetActive(false);
     }
 
     public void GameOver()
@@ -19,7 +18,7 @@ public class GameStateManager : MonoBehaviour
             return;
         }
         gameEnded = true;
-        gameOverTextObject.SetActive(true);
+        gameOverCanvas.SetActive(true);
         Invoke("RestartGame", 5f);
     }
 
