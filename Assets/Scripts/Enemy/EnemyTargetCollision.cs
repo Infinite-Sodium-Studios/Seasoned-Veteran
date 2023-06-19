@@ -3,11 +3,13 @@ using UnityEngine;
 public class EnemyTargetCollision : MonoBehaviour
 {
     private PlayerScoreManager playerScoreManager;
-    [SerializeField] private GameStateManager gameManager;
+    private GameStateManager gameManager;
 
     void Start()
     {
-        playerScoreManager = GameObject.Find("GameManagerObject").GetComponent<PlayerScoreManager>();
+        var gameManagerObject = GameObject.Find("GameManagerObject");
+        gameManager = gameManagerObject.GetComponent<GameStateManager>();
+        playerScoreManager = gameManagerObject.GetComponent<PlayerScoreManager>();
     }
 
     void OnTriggerEnter(Collider collider)
