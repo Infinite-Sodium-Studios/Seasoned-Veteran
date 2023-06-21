@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
 
-public class ProjectileMovement
+public class Projectile
 {
     private float speed;
     private WeaponStats weaponStats;
     private ExplosionParameters explosionParameters;
 
-    public ProjectileMovement(float _speed, WeaponStats _weaponStats, ExplosionParameters _explosionParameters)
+    public Projectile(float _speed, WeaponStats _weaponStats, ExplosionParameters _explosionParameters)
     {
         speed = _speed;
         weaponStats = _weaponStats;
