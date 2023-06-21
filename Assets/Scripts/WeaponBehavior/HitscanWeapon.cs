@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class HitscanShoot : BaseWeapon
+public class HitscanWeapon : BaseWeapon
 {
     private float maxRange;
     private float visualizeRange;
     private EventRateLimiter rateLimiter;
     GameObject hitscanPrefab;
 
-    public HitscanShoot(float _minMsBetweenShots, float _maxRange, float _visualizeRange, WeaponStats _weaponStats, GameObject _hitscanPrefab) : base(_minMsBetweenShots, _weaponStats)
+    public HitscanWeapon(float _minMsBetweenShots, float _maxRange, float _visualizeRange, WeaponStats _weaponStats, GameObject _hitscanPrefab) : base(_minMsBetweenShots, _weaponStats)
     {
         maxRange = _maxRange;
         visualizeRange = _visualizeRange;

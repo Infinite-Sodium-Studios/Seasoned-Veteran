@@ -15,7 +15,7 @@ public class ProjectileWeaponParameters : IWeaponParameters
     public BaseWeapon ToBaseWeapon()
     {
         var weaponStats = new WeaponStats(hittableEnemyTypes, explosionParameters.damage);
-        return new ProjectileShoot(msBetweenProjectileShots, projectileSpeed, weaponStats, projectilePrefab, explosionParameters);
+        return new ProjectileWeapon(msBetweenProjectileShots, projectileSpeed, weaponStats, projectilePrefab, explosionParameters);
     }
 
     public GameObject GetWeaponModel()

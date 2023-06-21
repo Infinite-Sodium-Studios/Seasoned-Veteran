@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class ProjectileShoot : BaseWeapon
+public class ProjectileWeapon : BaseWeapon
 {
     private float projectileSpeed;
     private GameObject projectilePrefab;
     private ExplosionParameters explosionParameters;
 
-    public ProjectileShoot(float _minMsBetweenShots, float _projectileSpeed, WeaponStats _weaponStats, GameObject _projectilePrefab, ExplosionParameters _explosionParameters = null) : base(_minMsBetweenShots, _weaponStats)
+    public ProjectileWeapon(float _minMsBetweenShots, float _projectileSpeed, WeaponStats _weaponStats, GameObject _projectilePrefab, ExplosionParameters _explosionParameters = null) : base(_minMsBetweenShots, _weaponStats)
     {
         projectileSpeed = _projectileSpeed;
         projectilePrefab = _projectilePrefab;
