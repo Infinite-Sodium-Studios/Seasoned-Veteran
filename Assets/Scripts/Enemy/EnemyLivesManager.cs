@@ -5,13 +5,11 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
     [SerializeField] private int initialHealth;
     private PlayerScoreManager playerScoreManager;
 
-    private EnemySpawning spawner;
     private int currentHealth;
     void Start()
     {
         Debug.Assert(initialHealth > 0);
         currentHealth = initialHealth;
-        spawner = GameObject.Find("EnemySpawnObject").GetComponent<EnemySpawning>();
         playerScoreManager = GameObject.Find("GameManagerObject").GetComponent<PlayerScoreManager>();
     }
 
