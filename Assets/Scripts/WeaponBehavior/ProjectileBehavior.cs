@@ -6,7 +6,7 @@ public class ProjectileBehavior : MonoBehaviour
 {
     bool initialized = false;
     private float speed;
-    private WeaponStats weaponStats;
+    public WeaponStats weaponStats { get; private set; }
     private ExplosionParameters explosionParameters;
 
     public void Init(float _speed, WeaponStats _weaponStats, ExplosionParameters _explosionParameters)
@@ -90,7 +90,7 @@ public class ProjectileBehavior : MonoBehaviour
         {
             if (currGameObject.TryGetComponent<IHittable>(out var hittable))
             {
-                int actualDamage = DamageWithFalloffCallback(explosionParameters.damage, distance);
+                int actualDamage = DamageWithFalloffCallback(weaponStats.damage, distance);
                 var weaponStatsWithFalloff = weaponStats.WithDamage(actualDamage);
                 hittable.HitEvent(gameObject.name, weaponStatsWithFalloff);
             }

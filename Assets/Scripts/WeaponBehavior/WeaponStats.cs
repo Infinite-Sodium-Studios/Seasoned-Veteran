@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class WeaponStats
 {
     private List<GameObject> hittableEnemies;
-    private int damage;
+    public int damage { get; private set; }
 
     public WeaponStats()
     {

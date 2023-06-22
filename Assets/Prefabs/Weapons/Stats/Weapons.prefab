@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
+    damage: 150
     msBetweenProjectileShots: 500
     projectileSpeed: 1
     projectilePrefab: {fileID: 7739884772350347285, guid: 355608b132d90e442962ae7286959704,
@@ -53,7 +54,6 @@ MonoBehaviour:
     hittableEnemyTypes:
     - {fileID: 4655971997202474437, guid: 9bc0dabf3e9e57b4db96e22f9fca06ba, type: 3}
     explosionParameters:
-      damage: 150
       explosionPrefab: {fileID: 6973167910681015815, guid: 75a469d4c8d40574e96277c6744973f2,
         type: 3}
       explosionRadius: 4
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
+    damage: 54
     msBetweenProjectileShots: 200
     projectileSpeed: 1.4
     projectilePrefab: {fileID: 7739884772350347285, guid: 06c6f2b6c12ebfa4691c5122501e41c5,
@@ -145,7 +146,6 @@ MonoBehaviour:
     hittableEnemyTypes:
     - {fileID: 4655971997202474437, guid: b5db256f61fd4e441b77c7c9da231e0b, type: 3}
     explosionParameters:
-      damage: 52
       explosionPrefab: {fileID: 0}
       explosionRadius: 0
 --- !u!1 &9209629509015553804
