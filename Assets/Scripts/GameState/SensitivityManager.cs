@@ -18,7 +18,6 @@ public class SensitivityManager : MonoBehaviour
     }
 
     public void SetMouseSensitivity(float newSensitivity) {
-        Debug.Log("Setting mouse sensitivity to: " + newSensitivity);
         PlayerPrefs.SetFloat(sensitivityPrefName, newSensitivity);
         sensitivity = newSensitivity;
     }
