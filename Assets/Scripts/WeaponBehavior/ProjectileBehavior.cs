@@ -43,6 +43,7 @@ public class ProjectileBehavior : MonoBehaviour
         {
             NonExplosiveCollision(collision);
         }
+        Destroy(gameObject);
     }
 
     int DamageWithFalloffCallback(int baseDamage, float distance)
@@ -58,7 +59,6 @@ public class ProjectileBehavior : MonoBehaviour
         {
             hittable.HitEvent(gameObject.name, weaponStats);
         }
-        Destroy(gameObject);
     }
 
     void ExplosiveCollision(Collision collision)
@@ -96,7 +96,6 @@ public class ProjectileBehavior : MonoBehaviour
             }
 
         }
-        Destroy(gameObject);
     }
 
 }
