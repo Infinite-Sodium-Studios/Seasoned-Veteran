@@ -1,6 +1,4 @@
-using UnityEngine;
-
 public interface IHittable
 {
-    void HitEvent(GameObject hitter, WeaponStats weaponStats);
+    void HitEvent(string hitter, WeaponStats weaponStats);
 }

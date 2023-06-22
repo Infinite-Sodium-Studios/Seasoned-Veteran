@@ -28,7 +28,7 @@ public class HitscanWeapon : BaseWeapon
         GameObject hitObject = hit.collider.gameObject;
         if (hitObject.TryGetComponent<IHittable>(out var hittable))
         {
-            hittable.HitEvent(shooter, weaponStats);
+            hittable.HitEvent(shooter.name, weaponStats);
         }
     }
 

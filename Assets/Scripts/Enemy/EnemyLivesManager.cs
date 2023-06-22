@@ -13,7 +13,7 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         playerScoreManager = GameObject.Find("GameManagerObject").GetComponent<PlayerScoreManager>();
     }
 
-    public void HitEvent(GameObject hitter, WeaponStats weaponStats)
+    public void HitEvent(string hitter, WeaponStats weaponStats)
     {
         if (!weaponStats.CanHitEnemy(gameObject))
         {
@@ -24,7 +24,7 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         currentHealth -= weaponStats.DamageToEnemy(gameObject);
         if (currentHealth <= 0)
         {
-            Debug.Log("Destroyed by " + hitter.name);
+            Debug.Log("Destroyed by " + hitter);
             playerScoreManager.OnEnemyKill();
             Destroy(gameObject);
         }

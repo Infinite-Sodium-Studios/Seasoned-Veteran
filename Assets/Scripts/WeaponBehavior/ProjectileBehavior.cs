@@ -56,7 +56,7 @@ public class ProjectileBehavior : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<IHittable>(out var hittable))
         {
-            hittable.HitEvent(gameObject, weaponStats);
+            hittable.HitEvent(gameObject.name, weaponStats);
         }
         Destroy(gameObject);
     }
@@ -92,7 +92,7 @@ public class ProjectileBehavior : MonoBehaviour
             {
                 int actualDamage = DamageWithFalloffCallback(explosionParameters.damage, distance);
                 var weaponStatsWithFalloff = weaponStats.WithDamage(actualDamage);
-                hittable.HitEvent(gameObject, weaponStatsWithFalloff);
+                hittable.HitEvent(gameObject.name, weaponStatsWithFalloff);
             }
 
         }
