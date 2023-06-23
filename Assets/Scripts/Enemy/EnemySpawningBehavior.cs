@@ -1,16 +1,28 @@
 using UnityEngine;
 
+[System.Serializable]
+public class EnemyPath
+{
+    public EnemyPath(GameObject spawnPoint, GameObject targetPoint)
+    {
+        this.spawnPoint = spawnPoint;
+        this.targetPoint = targetPoint;
+    }
+
+    public GameObject spawnPoint;
+    public GameObject targetPoint;
+}
+
 public class EnemySpawningBehavior : MonoBehaviour
 {
     private EnemySpawning enemySpawning;
     [SerializeField] private GameObject[] enemyPrefabs;
-    [SerializeField] private GameObject[] respawnPoints;
-    [SerializeField] private GameObject[] targetPoints;
+    [SerializeField] private EnemyPath[] paths;
     [SerializeField] private long respawnFrequencyMs;
 
     void Awake()
     {
-        enemySpawning = new EnemySpawning(respawnFrequencyMs, enemyPrefabs.Length, respawnPoints.Length, targetPoints.Length);
+        enemySpawning = new EnemySpawning(respawnFrequencyMs, enemyPrefabs.Length, paths.Length);
         enemySpawning.OnSpawn += Respawn;
     }
 
@@ -43,10 +55,11 @@ public class EnemySpawningBehavior : MonoBehaviour
 
     private void Respawn(SpawnInfo info)
     {
-        GameObject baseEnemyObject = enemyPrefabs[info.enemyIndex];
-        var spawnLocation = CalculateSpawnLocation(respawnPoints[info.spawnIndex]);
+        var baseEnemyObject = enemyPrefabs[info.enemyIndex];
+        var path = paths[info.pathIndex];
+        var spawnLocation = CalculateSpawnLocation(path.spawnPoint);
         var enemy = Instantiate(baseEnemyObject, spawnLocation, new Quaternion());
-        var target = targetPoints[info.targetIndex];
+        var target = paths[info.pathIndex].targetPoint;
         initEnemy(enemy, target, baseEnemyObject);
     }
 }

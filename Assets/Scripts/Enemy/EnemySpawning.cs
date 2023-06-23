@@ -2,38 +2,34 @@ using System;
 
 public struct SpawnInfo 
 {
-    public SpawnInfo(int _enemyIndex, int _spawnIndex, int _targetIndex)
+    public SpawnInfo(int _enemyIndex, int _pathIndex)
     {
         enemyIndex = _enemyIndex;
-        spawnIndex = _spawnIndex;
-        targetIndex = _targetIndex;
+        pathIndex = _pathIndex;
     }
 
     public int enemyIndex;
-    public int spawnIndex;
-    public int targetIndex;
+    public int pathIndex;
 }
 
 public class EnemySpawning
 {
     private long respawnFrequencyMs;
     private int countEnemyTypes;
-    private int countSpawnPoints;
-    private int countTargetPoints;
+    private int countPaths;
     public event Action<SpawnInfo> OnSpawn;
 
     private float msSinceLastSpawn = 0;
     private int remainingEnemiesForWave = 0;
-    private int spawnPointIndexForWave = 0;
+    private int pathIndexForWave = 0;
     private Random randomGenerator = new Random();
 
 
-    public EnemySpawning(long _respawnFrequencyMs, int _countEnemyTypes, int _countSpawnPoints, int _countTargetPoints)
+    public EnemySpawning(long _respawnFrequencyMs, int _countEnemyTypes, int _countPaths)
     {
         respawnFrequencyMs = _respawnFrequencyMs;
         countEnemyTypes = _countEnemyTypes;
-        countSpawnPoints = _countSpawnPoints;
-        countTargetPoints = _countTargetPoints;
+        countPaths = _countPaths;
     }
 
     public void tick(float deltaTimeMs)
@@ -47,21 +43,21 @@ public class EnemySpawning
         }
     }
 
-    private int GetNewSpawnPoint() {
-        var newSpawnPointIndex = spawnPointIndexForWave;
-        while (newSpawnPointIndex == spawnPointIndexForWave && countSpawnPoints > 1) {
-            newSpawnPointIndex = randomGenerator.Next(0, countSpawnPoints);
+    private int GetNewPath() {
+        var newPathIndex = pathIndexForWave;
+        while (newPathIndex == pathIndexForWave && countPaths > 1) {
+            newPathIndex = randomGenerator.Next(0, countPaths);
         }
-        return newSpawnPointIndex;
+        return newPathIndex;
     }
 
     private int GetSpawnPointIndexForWave() {
         if (remainingEnemiesForWave <= 0) {
-            spawnPointIndexForWave = GetNewSpawnPoint();
+            pathIndexForWave = GetNewPath();
             remainingEnemiesForWave = randomGenerator.Next(3, 5);
         }
         --remainingEnemiesForWave;
-        return spawnPointIndexForWave;
+        return pathIndexForWave;
     }
 
     private int GetEnemyIndex()
@@ -71,9 +67,8 @@ public class EnemySpawning
 
     private SpawnInfo Respawn()
     {
-        var spawnIndex = GetSpawnPointIndexForWave();
-        var targetIndex = spawnIndex % countTargetPoints;
+        var pathIndex = GetSpawnPointIndexForWave();
         var enemyIndex = GetEnemyIndex();
-        return new SpawnInfo(enemyIndex, spawnIndex, targetIndex);
+        return new SpawnInfo(enemyIndex, pathIndex);
     }
 }
