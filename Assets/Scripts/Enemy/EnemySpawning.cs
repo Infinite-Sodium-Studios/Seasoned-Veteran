@@ -39,7 +39,6 @@ public class EnemySpawning
     public void tick(float deltaTimeMs)
     {
         msSinceLastSpawn += deltaTimeMs;
-        UnityEngine.Debug.Log("Ms since last spawn: " + msSinceLastSpawn + " vs " + respawnFrequencyMs);
         if (msSinceLastSpawn >= respawnFrequencyMs)
         {
             var spawnInfo = Respawn();
