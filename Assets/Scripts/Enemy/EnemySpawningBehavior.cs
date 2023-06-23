@@ -29,15 +29,24 @@ public class EnemySpawningBehavior : MonoBehaviour
         return location;
     }
 
+    private void initEnemy(GameObject enemy, GameObject target, GameObject baseEnemyObject)
+    {
+        if (enemy.TryGetComponent<EnemyTypeManager>(out var type))
+        {
+            type.Init(baseEnemyObject);
+        }
+        if (enemy.TryGetComponent<EnemyMovement>(out var movement))
+        {
+            movement.Init(target);
+        }
+    }
+
     private void Respawn(SpawnInfo info)
     {
         GameObject baseEnemyObject = enemyPrefabs[info.enemyIndex];
         var spawnLocation = CalculateSpawnLocation(respawnPoints[info.spawnIndex]);
         var enemy = Instantiate(baseEnemyObject, spawnLocation, new Quaternion());
-        var movement = enemy.GetComponent<EnemyMovement>();
         var target = targetPoints[info.targetIndex];
-        movement.Init(target);
-        var enemyTypeManager = enemy.GetComponent<EnemyTypeManager>();
-        enemyTypeManager.Init(baseEnemyObject);
+        initEnemy(enemy, target, baseEnemyObject);
     }
 }

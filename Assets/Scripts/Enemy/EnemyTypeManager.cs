@@ -2,24 +2,14 @@ using UnityEngine;
 
 public class EnemyTypeManager : MonoBehaviour
 {
-    public GameObject instantiationRoot;
+    private GameObject baseObject;
 
-    public void Init(GameObject baseEnemyObject)
-    {
-        var baseEnemyTypeManager = baseEnemyObject.GetComponent<EnemyTypeManager>();
-        Debug.Assert(baseEnemyTypeManager != null, "Can only instantiate enemy off of object with EnemyTypeManager component");
-        instantiationRoot = baseEnemyTypeManager.GetInstantiationRoot();
+    public void Init(GameObject _baseObject) {
+        baseObject = _baseObject;
     }
 
-    GameObject GetInstantiationRoot()
+    public bool IsSameTypeAs(GameObject other)
     {
-        return instantiationRoot != null ? instantiationRoot : gameObject;
-    }
-
-    public bool IsSameEnemyType(GameObject other)
-    {
-        var otherEnemyTypeManager = other.GetComponent<EnemyTypeManager>();
-        Debug.Assert(otherEnemyTypeManager != null, "Enemy object must have EnemyTypeManager component");
-        return GetInstantiationRoot() == otherEnemyTypeManager.GetInstantiationRoot();
+        return baseObject == other;
     }
 }
