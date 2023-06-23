@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b840beda98bb2d4ba8c9b477d827977, type: 3}
+  m_Name: PlasmaGunStats
+  m_EditorClassIdentifier: 
+  damage: 54
+  msBetweenProjectileShots: 200
+  projectileSpeed: 1.4
+  projectilePrefab: {fileID: 7739884772350347285, guid: 06c6f2b6c12ebfa4691c5122501e41c5,
+    type: 3}
+  hittableEnemyTypes:
+  - {fileID: 4655971997202474437, guid: b5db256f61fd4e441b77c7c9da231e0b, type: 3}
+  explosionParameters:
+    explosionPrefab: {fileID: 0}
+    explosionRadius: 0

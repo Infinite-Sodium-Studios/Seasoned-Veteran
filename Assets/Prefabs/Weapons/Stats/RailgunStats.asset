@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df04fa6b1d81564bb5384b94f5c13cb, type: 3}
+  m_Name: RailgunStats
+  m_EditorClassIdentifier: 
+  damage: 200
+  msBetweenHitscanShots: 1000
+  hitscanRange: 3000
+  hitscanVisualizeRange: 0.5
+  hitscanPrefab: {fileID: 5143731085917890517, guid: ae89d0c8f1dbc034785ae8f284838e23,
+    type: 3}
+  hitscanWeaponModel: {fileID: 919132149155446097, guid: 7ee290c88843d2c49be639ef4dea8a73,
+    type: 3}
+  hittableEnemyTypes:
+  - {fileID: 4655971997202474437, guid: 810aabb30f3262c42a101829f035d964, type: 3}

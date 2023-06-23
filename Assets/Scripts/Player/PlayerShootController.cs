@@ -2,6 +2,13 @@ using UnityEngine;
 using StarterAssets;
 using System.Collections.Generic;
 
+[System.Serializable]
+public class Weapon
+{
+    [SerializeField] public GameObject model;
+    [SerializeField] public IWeaponParameters parameters;
+}
+
 public class PlayerShootController : MonoBehaviour
 {
     private StarterAssetsInputs _input;
@@ -9,28 +16,15 @@ public class PlayerShootController : MonoBehaviour
     private List<BaseWeapon> weapons;
     private List<GameObject> weaponModels;
     int activeWeaponIndex;
-
-    [SerializeReference] private List<GameObject> weaponObjects;
-
-    IWeaponParameters GetParametersFromWeaponObject(GameObject weaponObject)
-    {
-        if (weaponObject.TryGetComponent<IWeaponParametersController>(out var weaponParams))
-        {
-            return weaponParams.GetParameters();
-        }
-        string errorMessage = "Weapon object must be assigned parameters";
-        Debug.LogException(new System.Exception(errorMessage));
-        return null;
-    }
+    [SerializeField] private List<Weapon> weaponObjects;
 
     void Start()
     {
         _input = GetComponent<StarterAssetsInputs>();
         _player = gameObject;
 
-        var weaponParameters = weaponObjects.ConvertAll<IWeaponParameters>(weaponObject => GetParametersFromWeaponObject(weaponObject));
-        weapons = weaponParameters.ConvertAll<BaseWeapon>(weaponParams => weaponParams.ToBaseWeapon());
-        weaponModels = weaponParameters.ConvertAll<GameObject>(weaponParams => weaponParams.GetWeaponModel());
+        weapons = weaponObjects.ConvertAll<BaseWeapon>(weapon => weapon.parameters.ToBaseWeapon());
+        weaponModels = weaponObjects.ConvertAll<GameObject>(weapon => weapon.model);
         activeWeaponIndex = 0;
         for (int i = 0; i < weaponModels.Count; i++)
         {
