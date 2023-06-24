@@ -152,18 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4b9e104b276a04d98fc2bc6a39d058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5972121389989031381 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6318739757002963563, guid: 548ae11ce19219942896b1e528a16d12,
-    type: 3}
-  m_PrefabInstance: {fileID: 383246423690467262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71e02614eb4731b43a9b3f04b89894c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1083844666056135506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,7 +393,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sensitivityManager
       value: 
-      objectReference: {fileID: 5972121389989031381}
+      objectReference: {fileID: 0}
     - target: {fileID: 3950784614482380787, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
       propertyPath: m_RootOrder
@@ -520,7 +508,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sensitivityManager
       value: 
-      objectReference: {fileID: 5972121389989031381}
+      objectReference: {fileID: 0}
     - target: {fileID: 576568942734295585, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
         type: 3}
       propertyPath: playerScoreManager
@@ -620,12 +608,12 @@ PrefabInstance:
         type: 3}
       propertyPath: sensitivityManager
       value: 
-      objectReference: {fileID: 5972121389989031381}
+      objectReference: {fileID: 0}
     - target: {fileID: 7380657256090019737, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5972121389989031381}
+      objectReference: {fileID: 0}
     - target: {fileID: 8023820409259839299, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
         type: 3}
       propertyPath: m_AnchorMax.y
