@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16892189df719646b05cd06dd138d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityManager: {fileID: 0}
+  sensitivity: {fileID: 11400000, guid: 4cfc5d00a9f44d248ac466b2b811e82b, type: 2}
   sliderElement: {fileID: 7052603353909475516}
 --- !u!1 &3310033287980318633
 GameObject:
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1057d4bbe78049947a8d2b56aac79288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityManager: {fileID: 0}
+  sensitivity: {fileID: 11400000, guid: 4cfc5d00a9f44d248ac466b2b811e82b, type: 2}
   textElement: {fileID: 1709800364780357679}
 --- !u!114 &1709800364780357679
 MonoBehaviour:

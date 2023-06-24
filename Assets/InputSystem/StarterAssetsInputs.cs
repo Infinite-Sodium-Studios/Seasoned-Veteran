@@ -20,7 +20,7 @@ namespace StarterAssets
         public bool analogMovement;
 
         [Header("Mouse Settings")]
-        [SerializeField] private SensitivityManager sensitivityManager;
+        [SerializeField] private MouseSensitivitySO sensitivity;
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
 
@@ -96,7 +96,7 @@ namespace StarterAssets
         public void LookInput(Vector2 newLookDirection)
         {
             if (blockInputs) return;
-            var mouseSensitivity = GetMouseSensitivity();
+            var mouseSensitivity = sensitivity.GetMouseSensitivity();
             newLookDirection = Vector2.Scale(newLookDirection, new Vector2(mouseSensitivity, mouseSensitivity));
             look = newLookDirection;
         }
@@ -139,14 +139,5 @@ namespace StarterAssets
         public void Disable() {
             blockInputs = true;
         }
-
-        public float GetMouseSensitivity() {
-            return sensitivityManager.GetMouseSensitivity();
-        }
-
-        public void SetMouseSensitivity(float newSensitivity) {
-            sensitivityManager.SetMouseSensitivity(newSensitivity);
-        }
     }
-
 }

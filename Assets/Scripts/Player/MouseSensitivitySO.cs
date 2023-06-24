@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SensitivityManager : MonoBehaviour
+[CreateAssetMenu(fileName = "MouseSensitivity", menuName = "Mouse Sensitivity", order = 1)]
+public class MouseSensitivitySO : ScriptableObject
 {
     public float sensitivity;
-    private static float defaultSensitivity = 0.5f;
+    [SerializeField] private static float defaultSensitivity = 0.5f;
     private static string sensitivityPrefName = "MouseSensitivity";
 
-    private void Start() {
+    private void Awake() {
         sensitivity = PlayerPrefs.GetFloat(sensitivityPrefName, defaultSensitivity);
         Debug.Log("Loaded mouse sensitivity: " + sensitivity);
         SetMouseSensitivity(sensitivity);

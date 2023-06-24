@@ -176,7 +176,7 @@ MonoBehaviour:
   shoot: 0
   selectedWeapon: 0
   analogMovement: 0
-  sensitivityManager: {fileID: 0}
+  sensitivity: {fileID: 11400000, guid: 4cfc5d00a9f44d248ac466b2b811e82b, type: 2}
   cursorLocked: 1
   cursorInputForLook: 1
 --- !u!114 &4440497556094278981
