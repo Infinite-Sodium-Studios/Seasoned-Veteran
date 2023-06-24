@@ -3,35 +3,30 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerScore", menuName = "Player Score", order = 1)]
 public class PlayerScoreSO : Tickable
 {
-    public int score { get; private set; }
-    public float timeSurvivedMs { get; private set; }
-    private int enemiesEscaped;
-    [SerializeField] private int maxAllowedEscapedEnemies;
+    public PlayerScore playerScore { get; private set; }
+    [SerializeField] private int numLives;
+    [SerializeField] private GameEvent restartGameEvent;
+    private TriggerableAction restartGameListener;
 
-    void OnEnable()
+    void Init()
     {
-        score = 0;
-        timeSurvivedMs = 0;
-        enemiesEscaped = 0;
+        playerScore = new PlayerScore(numLives);
     }
 
-    public void OnEnemyKill()
+    public void OnEnable()
     {
-        score++;
+        Init();
+        restartGameListener = new TriggerableAction(Init);
+        restartGameEvent.Add(restartGameListener);
     }
 
-    public void OnEnemyEscape()
+    public void OnDisable()
     {
-        enemiesEscaped++;
-    }
-
-    public int RemainingLives()
-    {
-        return maxAllowedEscapedEnemies - enemiesEscaped;
+        restartGameEvent.Remove(restartGameListener);
     }
 
     public override void TickMs(float deltaTimeMs)
     {
-        timeSurvivedMs += deltaTimeMs;
+        playerScore.TickMs(deltaTimeMs);
     }
 }

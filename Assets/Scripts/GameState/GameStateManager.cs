@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameEvent restartGameEvent;
     private bool gameEnded;
     void Start()
     {
@@ -25,6 +26,7 @@ public class GameStateManager : MonoBehaviour
     void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        restartGameEvent.Trigger();
     }
 
     public void QuitGame()

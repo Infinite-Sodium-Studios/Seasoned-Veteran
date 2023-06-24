@@ -3,13 +3,15 @@ using UnityEngine;
 public class EnemyLivesManager : MonoBehaviour, IHittable
 {
     [SerializeField] private int initialHealth;
-    [SerializeField] private PlayerScoreSO playerScore;
+    [SerializeField] private PlayerScoreSO playerScoreSO;
+    private PlayerScore playerScore;
 
     private int currentHealth;
     void Start()
     {
         Debug.Assert(initialHealth > 0);
         currentHealth = initialHealth;
+        playerScore = playerScoreSO.playerScore;
     }
 
     public void HitEvent(string hitter, WeaponStats weaponStats)

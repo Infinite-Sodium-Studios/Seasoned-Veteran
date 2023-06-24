@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 0}
+  restartGameEvent: {fileID: 11400000, guid: a6e2f4acddd0c634a9c23f21ed65f447, type: 2}
 --- !u!114 &6318739757002963573
 MonoBehaviour:
   m_ObjectHideFlags: 0

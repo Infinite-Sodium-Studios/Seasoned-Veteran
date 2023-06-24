@@ -4,7 +4,7 @@ public class HitscanWeapon : BaseWeapon
 {
     private float maxRange;
     private float visualizeRange;
-    private EventRateLimiter rateLimiter;
+    private RateLimiter rateLimiter;
     GameObject hitscanPrefab;
 
     public HitscanWeapon(float _minMsBetweenShots, float _maxRange, float _visualizeRange, WeaponStats _weaponStats, GameObject _hitscanPrefab) : base(_minMsBetweenShots, _weaponStats)

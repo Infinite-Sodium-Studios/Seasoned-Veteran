@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 100
-  playerScore: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
+  playerScoreSO: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
 --- !u!114 &5978267952725375803
 MonoBehaviour:
   m_ObjectHideFlags: 0

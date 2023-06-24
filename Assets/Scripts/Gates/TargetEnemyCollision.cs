@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class TargetEnemyCollision : MonoBehaviour
 {
-    [SerializeField] private PlayerScoreSO playerScore;
+    [SerializeField] private PlayerScoreSO playerScoreSO;
     private GameStateManager gameManager;
+    private PlayerScore playerScore;
 
     void Start()
     {
         var gameManagerObject = GameObject.Find("GameManagerObject");
         gameManager = gameManagerObject.GetComponent<GameStateManager>();
+        playerScore = playerScoreSO.playerScore;
     }
 
     void OnTriggerEnter(Collider collider)

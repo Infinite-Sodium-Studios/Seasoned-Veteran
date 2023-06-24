@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0584cc417a8164f4ebc87d5180579cad, type: 3}
   m_Name: PlayerScore
   m_EditorClassIdentifier: 
-  maxAllowedEscapedEnemies: 4
+  numLives: 4
+  restartGameEvent: {fileID: 11400000, guid: a6e2f4acddd0c634a9c23f21ed65f447, type: 2}

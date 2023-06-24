@@ -3,12 +3,12 @@ using UnityEngine;
 
 public abstract class BaseWeapon
 {
-    private EventRateLimiter rateLimiter;
+    private RateLimiter rateLimiter;
     protected WeaponStats weaponStats;
 
     protected BaseWeapon(float _minMsBetweenShots, WeaponStats _weaponStats)
     {
-        rateLimiter = new EventRateLimiter(_minMsBetweenShots);
+        rateLimiter = new RateLimiter(_minMsBetweenShots);
         weaponStats = _weaponStats;
     }
 
