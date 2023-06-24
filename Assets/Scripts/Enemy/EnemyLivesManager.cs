@@ -3,14 +3,13 @@ using UnityEngine;
 public class EnemyLivesManager : MonoBehaviour, IHittable
 {
     [SerializeField] private int initialHealth;
-    private PlayerScoreManager playerScoreManager;
+    [SerializeField] private PlayerScoreSO playerScore;
 
     private int currentHealth;
     void Start()
     {
         Debug.Assert(initialHealth > 0);
         currentHealth = initialHealth;
-        playerScoreManager = GameObject.Find("GameManagerObject").GetComponent<PlayerScoreManager>();
     }
 
     public void HitEvent(string hitter, WeaponStats weaponStats)
@@ -25,7 +24,7 @@ public class EnemyLivesManager : MonoBehaviour, IHittable
         if (currentHealth <= 0)
         {
             Debug.Log("Destroyed by " + hitter);
-            playerScoreManager.OnEnemyKill();
+            playerScore.OnEnemyKill();
             Destroy(gameObject);
         }
     }

@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class EnemyTargetCollision : MonoBehaviour
+public class TargetEnemyCollision : MonoBehaviour
 {
-    private PlayerScoreManager playerScoreManager;
+    [SerializeField] private PlayerScoreSO playerScore;
     private GameStateManager gameManager;
 
     void Start()
     {
         var gameManagerObject = GameObject.Find("GameManagerObject");
         gameManager = gameManagerObject.GetComponent<GameStateManager>();
-        playerScoreManager = gameManagerObject.GetComponent<PlayerScoreManager>();
     }
 
     void OnTriggerEnter(Collider collider)
@@ -19,9 +18,8 @@ public class EnemyTargetCollision : MonoBehaviour
             return;
         }
         Destroy(collider.gameObject);
-        Debug.Assert(playerScoreManager != null, "PlayerScoreManager cannot be null");
-        playerScoreManager.OnEnemyEscape();
-        if (playerScoreManager.GetEnemiesEscapedSlack() <= 0)
+        playerScore.OnEnemyEscape();
+        if (playerScore.RemainingLives() <= 0)
         {
             gameManager.GameOver();
         }

@@ -550,7 +550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d660b1a2dda75554ca682d99b099aea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseObject: {fileID: 0}
 --- !u!114 &-7836670644729748851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,6 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 100
+  playerScore: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
 --- !u!114 &5978267952725375803
 MonoBehaviour:
   m_ObjectHideFlags: 0

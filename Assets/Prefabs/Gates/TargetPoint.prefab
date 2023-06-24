@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6300110015908439030}
   - component: {fileID: 6300110015908438921}
   - component: {fileID: 6300110015908438920}
-  - component: {fileID: 8484637531370285099}
+  - component: {fileID: 9017122887603386641}
   m_Layer: 0
   m_Name: TargetPoint
   m_TagString: Target
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8484637531370285099
+--- !u!114 &9017122887603386641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,4 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb0e33a58a4c2542955f93d3bc79987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  playerScore: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}

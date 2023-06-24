@@ -3,13 +3,13 @@ using TMPro;
 
 public class PlayerScoreTextUpdate : MonoBehaviour
 {
-    [SerializeField] private PlayerScoreManager playerScoreManager;
+    [SerializeField] private PlayerScoreSO playerScore;
     [SerializeField] private string baseText;
     [SerializeField] private TextMeshProUGUI textElement;
 
     void Update()
     {
-        string textValue = baseText + playerScoreManager.GetScore().ToString();
+        string textValue = baseText + playerScore.score.ToString();
         textElement.text = textValue;
     }
 }
