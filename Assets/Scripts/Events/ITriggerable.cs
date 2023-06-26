@@ -1,6 +1,4 @@
-using System;
-
-public interface ITriggerable
+public interface ITriggerable<T>
 {
-    public void OnTrigger();
+    public void OnTrigger(T arg);
 }

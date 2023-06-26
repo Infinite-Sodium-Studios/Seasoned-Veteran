@@ -111,3 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScoreSO: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
+  gameStateSO: {fileID: 11400000, guid: 932136f2d9866eb45a0bc046970e309b, type: 2}

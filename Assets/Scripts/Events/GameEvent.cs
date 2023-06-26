@@ -1,25 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameEvent", menuName = "Game Event", order = 1)]
-public class GameEvent : ScriptableObject
+public class GameEvent<T> : ScriptableObject
 {
-    List<ITriggerable> listeners = new List<ITriggerable>();
+    List<ITriggerable<T>> listeners = new List<ITriggerable<T>>();
 
-    public void Trigger()
+    public void Trigger(T arg)
     {
         for (int i = listeners.Count - 1; i >= 0; i--)
         {
-            listeners[i].OnTrigger();
+            listeners[i].OnTrigger(arg);
         }
     }
 
-    public void Add(ITriggerable listener)
+    public void Add(ITriggerable<T> listener)
     {
         listeners.Add(listener);
     }
 
-    public void Remove(ITriggerable listener)
+    public void Remove(ITriggerable<T> listener)
     {
         listeners.Remove(listener);
     }

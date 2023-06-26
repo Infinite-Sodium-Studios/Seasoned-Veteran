@@ -128,18 +128,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 383246423690467262}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5972121389989031370 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6318739757002963572, guid: 548ae11ce19219942896b1e528a16d12,
-    type: 3}
-  m_PrefabInstance: {fileID: 383246423690467262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45957602a084a684f87b455f7edf31e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5972121389989031380 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6318739757002963562, guid: 548ae11ce19219942896b1e528a16d12,
@@ -401,21 +389,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3950784614482380787, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -565.1435
-      objectReference: {fileID: 0}
-    - target: {fileID: 3950784614482380787, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -338.71402
-      objectReference: {fileID: 0}
-    - target: {fileID: 3950784614482380787, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.485933
-      objectReference: {fileID: 0}
-    - target: {fileID: 3950784614482380787, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
-        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -599,11 +572,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5450486579105751043, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5972121389989031370}
     - target: {fileID: 5517249025876234393, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
         type: 3}
       propertyPath: sensitivityManager

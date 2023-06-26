@@ -5,8 +5,8 @@ public class PlayerScoreSO : Tickable
 {
     public PlayerScore playerScore { get; private set; }
     [SerializeField] private int numLives;
-    [SerializeField] private GameEvent restartGameEvent;
-    private TriggerableAction restartGameListener;
+    [SerializeField] private VoidGameEvent restartGameEvent;
+    private VoidTriggerableAction restartGameListener;
 
     void Init()
     {
@@ -16,7 +16,7 @@ public class PlayerScoreSO : Tickable
     public void OnEnable()
     {
         Init();
-        restartGameListener = new TriggerableAction(Init);
+        restartGameListener = new VoidTriggerableAction(Init);
         restartGameEvent.Add(restartGameListener);
     }
 

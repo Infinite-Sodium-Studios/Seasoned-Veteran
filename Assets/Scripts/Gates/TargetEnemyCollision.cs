@@ -1,29 +1,28 @@
+using System.Collections;
 using UnityEngine;
 
 public class TargetEnemyCollision : MonoBehaviour
 {
     [SerializeField] private PlayerScoreSO playerScoreSO;
-    private GameStateManager gameManager;
+    [SerializeField] private GameStateSO gameStateSO;
     private PlayerScore playerScore;
 
     void Start()
     {
-        var gameManagerObject = GameObject.Find("GameManagerObject");
-        gameManager = gameManagerObject.GetComponent<GameStateManager>();
         playerScore = playerScoreSO.playerScore;
     }
 
-    void OnTriggerEnter(Collider collider)
+    IEnumerator OnTriggerEnter(Collider collider)
     {
         if (!collider.gameObject.CompareTag("Enemy"))
         {
-            return;
+            yield return null;
         }
         Destroy(collider.gameObject);
         playerScore.OnEnemyEscape();
         if (playerScore.RemainingLives() <= 0)
         {
-            gameManager.GameOver();
+            StartCoroutine(gameStateSO.GameOverThenRestartAfterDelayMs(5_000));
         }
     }
 }

@@ -61,21 +61,6 @@ PrefabInstance:
       propertyPath: sensitivityManager
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5482773433991757606, guid: 868b42da69174844b86b218a84ebc5e0,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5482773433991757606, guid: 868b42da69174844b86b218a84ebc5e0,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 5482773433991757606, guid: 868b42da69174844b86b218a84ebc5e0,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameStateManager, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 6298598112498061367, guid: 868b42da69174844b86b218a84ebc5e0,
         type: 3}
       propertyPath: m_Name
@@ -366,6 +351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878705523846161999, guid: 6f343342291af9943a90582f2da8265e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6878705523846162035, guid: 6f343342291af9943a90582f2da8265e,
         type: 3}
