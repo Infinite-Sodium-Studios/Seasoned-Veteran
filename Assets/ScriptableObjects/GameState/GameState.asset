@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24a6cf03b362d14ba8c2f0eee65bd85, type: 3}
+  m_Name: GameState
+  m_EditorClassIdentifier: 
+  loadSceneEvent: {fileID: 11400000, guid: c307621a48b506446a4686f6533803e6, type: 2}
+  restartGameEvent: {fileID: 11400000, guid: 360d7efcbe161f84a98a68e1c4738e4d, type: 2}
+  gameOverEvent: {fileID: 11400000, guid: dd503aa712f8f6541a2b8307a415f7e5, type: 2}
+  quitGameEvent: {fileID: 11400000, guid: 831bdbfde9247114f9cc4fd58c4a5609, type: 2}

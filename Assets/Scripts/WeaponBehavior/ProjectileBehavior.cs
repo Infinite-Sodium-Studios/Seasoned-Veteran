@@ -6,7 +6,7 @@ public class ProjectileBehavior : MonoBehaviour
 {
     bool initialized = false;
     private float speed;
-    private WeaponStats weaponStats;
+    public WeaponStats weaponStats { get; private set; }
     private ExplosionParameters explosionParameters;
 
     public void Init(float _speed, WeaponStats _weaponStats, ExplosionParameters _explosionParameters)
@@ -43,6 +43,7 @@ public class ProjectileBehavior : MonoBehaviour
         {
             NonExplosiveCollision(collision);
         }
+        Destroy(gameObject);
     }
 
     int DamageWithFalloffCallback(int baseDamage, float distance)
@@ -56,9 +57,8 @@ public class ProjectileBehavior : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<IHittable>(out var hittable))
         {
-            hittable.HitEvent(gameObject, weaponStats);
+            hittable.HitEvent(gameObject.name, weaponStats);
         }
-        Destroy(gameObject);
     }
 
     void ExplosiveCollision(Collision collision)
@@ -90,13 +90,12 @@ public class ProjectileBehavior : MonoBehaviour
         {
             if (currGameObject.TryGetComponent<IHittable>(out var hittable))
             {
-                int actualDamage = DamageWithFalloffCallback(explosionParameters.damage, distance);
+                int actualDamage = DamageWithFalloffCallback(weaponStats.damage, distance);
                 var weaponStatsWithFalloff = weaponStats.WithDamage(actualDamage);
-                hittable.HitEvent(gameObject, weaponStatsWithFalloff);
+                hittable.HitEvent(gameObject.name, weaponStatsWithFalloff);
             }
 
         }
-        Destroy(gameObject);
     }
 
 }

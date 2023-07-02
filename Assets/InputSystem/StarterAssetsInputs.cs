@@ -1,15 +1,10 @@
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
-#endif
 
 namespace StarterAssets
 {
     public class StarterAssetsInputs : MonoBehaviour
-    {
-        [Header("Tweakable Parameters")]
-        private bool blockInputs = false;
-        
+    {   
         [Header("Character Input Values")]
         public Vector2 move;
         public Vector2 look;
@@ -22,15 +17,11 @@ namespace StarterAssets
         public bool analogMovement;
 
         [Header("Mouse Settings")]
-        [SerializeField] private SensitivityManager sensitivityManager;
+        [SerializeField] private MouseSensitivitySO sensitivity;
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
+        [SerializeField] private GameEvent<bool> pauseEvent;
 
-        void Start() {
-            Enable();
-        }
-
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         public void OnMove(InputValue value)
         {
             MoveInput(value.Get<Vector2>());
@@ -90,8 +81,22 @@ namespace StarterAssets
                 SelectWeaponIndexInput(3);
             }
         }
-#endif
 
+        public void OnPause(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                pauseEvent.Trigger(true);
+            }
+        }
+
+        public void OnResume(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                pauseEvent.Trigger(false);
+            }
+        }
 
         public void MoveInput(Vector2 newMoveDirection)
         {
@@ -100,8 +105,7 @@ namespace StarterAssets
 
         public void LookInput(Vector2 newLookDirection)
         {
-            if (blockInputs) return;
-            var mouseSensitivity = GetMouseSensitivity();
+            var mouseSensitivity = sensitivity.GetMouseSensitivity();
             newLookDirection = Vector2.Scale(newLookDirection, new Vector2(mouseSensitivity, mouseSensitivity));
             look = newLookDirection;
         }
@@ -123,7 +127,6 @@ namespace StarterAssets
 
         public void SelectWeaponIndexInput(int weaponIndex)
         {
-            if (blockInputs) return;
             selectedWeapon = weaponIndex;
         }
 
@@ -136,22 +139,5 @@ namespace StarterAssets
         {
             Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
         }
-
-        public void Enable() {
-            blockInputs = false;
-        }
-        
-        public void Disable() {
-            blockInputs = true;
-        }
-
-        public float GetMouseSensitivity() {
-            return sensitivityManager.GetMouseSensitivity();
-        }
-
-        public void SetMouseSensitivity(float newSensitivity) {
-            sensitivityManager.SetMouseSensitivity(newSensitivity);
-        }
     }
-
 }

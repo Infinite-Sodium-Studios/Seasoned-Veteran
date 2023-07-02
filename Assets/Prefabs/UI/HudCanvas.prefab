@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc66e19b9292cd745b620981f17b8c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreManager: {fileID: 0}
+  playerScoreSO: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
   baseText: 'Score: '
   textElement: {fileID: 6534581521021124109}
 --- !u!114 &6534581521021124109
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d879cabe1dd569e438471e6573518fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreManager: {fileID: 0}
+  playerScoreSO: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
   baseText: 'Time: '
   textElement: {fileID: 6534581521450889501}
 --- !u!114 &6534581521450889501
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c9d47ffae1b54db993098a292dad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreManager: {fileID: 0}
+  playerScoreSO: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
   baseText: 'Lives: '
   textElement: {fileID: 6534581522188986683}
 --- !u!23 &6534581522188986682

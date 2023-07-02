@@ -3,13 +3,20 @@ using TMPro;
 
 public class PlayerTimeSurvivedTextUpdate : MonoBehaviour
 {
-    [SerializeField] private PlayerScoreManager playerScoreManager;
+    [SerializeField] private PlayerScoreSO playerScoreSO;
     [SerializeField] private string baseText;
     [SerializeField] private TextMeshProUGUI textElement;
+    private PlayerScore playerScore;
+
+    void Start()
+    {
+        playerScore = playerScoreSO.playerScore;
+    }
 
     void Update()
     {
-        string textValue = baseText + playerScoreManager.GetTimeSurvived().ToString("0.00");
+        var timeSurvivedSec = playerScore.timeSurvivedMs / 1000f;
+        string textValue = baseText + timeSurvivedSec.ToString("0.00");
         textElement.text = textValue;
     }
 }

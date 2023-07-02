@@ -3,37 +3,30 @@ using UnityEngine;
 public class EnemyLivesManager : MonoBehaviour, IHittable
 {
     [SerializeField] private int initialHealth;
-    private GameObject enemyObject;
-    private PlayerScoreManager playerScoreManager;
+    [SerializeField] private PlayerScoreSO playerScoreSO;
+    private PlayerScore playerScore;
 
-    private EnemySpawning spawner;
     private int currentHealth;
     void Start()
     {
         Debug.Assert(initialHealth > 0);
         currentHealth = initialHealth;
-        spawner = GameObject.Find("EnemySpawnObject").GetComponent<EnemySpawning>();
-        enemyObject = gameObject;
-        playerScoreManager = GameObject.Find("GameManagerObject").GetComponent<PlayerScoreManager>();
+        playerScore = playerScoreSO.playerScore;
     }
 
-    public void HitEvent(GameObject hitter, WeaponStats weaponStats)
+    public void HitEvent(string hitter, WeaponStats weaponStats)
     {
-        if (hitter.tag == "Enemy" || enemyObject == null)
-        {
-            return;
-        }
-        if (!weaponStats.CanHitEnemy(enemyObject))
+        if (!weaponStats.CanHitEnemy(gameObject))
         {
             Debug.Log("Weapon could not damage enemy!");
             return;
         }
 
-        currentHealth -= weaponStats.DamageToEnemy(enemyObject);
+        currentHealth -= weaponStats.DamageToEnemy(gameObject);
         if (currentHealth <= 0)
         {
-            Debug.Log("Destroyed by " + hitter.name);
-            playerScoreManager.OnEnemyKill();
+            Debug.Log("Destroyed by " + hitter);
+            playerScore.OnEnemyKill();
             Destroy(gameObject);
         }
     }

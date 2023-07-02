@@ -3,12 +3,17 @@ using UnityEngine.UI;
 
 public class SensitivitySliderUpdate : MonoBehaviour
 {
-    [SerializeField] private SensitivityManager sensitivityManager;
+    [SerializeField] private MouseSensitivitySO sensitivity;
     [SerializeField] private Slider sliderElement;
+
+    void Start()
+    {
+        float sensitivityValue = sensitivity.GetMouseSensitivity();
+        sliderElement.value = sensitivityValue;
+    }
 
     void Update()
     {
-        float sensitivityValue = sensitivityManager.GetMouseSensitivity();
-        sliderElement.value = sensitivityValue;
+        sensitivity.SetMouseSensitivity(sliderElement.value);
     }
 }

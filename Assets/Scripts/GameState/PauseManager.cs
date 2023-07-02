@@ -1,58 +1,42 @@
 using UnityEngine;
-using StarterAssets;
+using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseCanvas;
-    [SerializeField] private StarterAssetsInputs inputs;
-    private bool isPaused;
-    private PauseAction action;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private GameEvent<bool> pauseEvent;
+
+    private TriggerableAction<bool> pauseListener;
+
 
     private void Awake()
     {
-        action = new PauseAction();
+        pauseListener = new TriggerableAction<bool>((isPaused) => {
+            if (isPaused)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
+        });
     }
 
     private void OnEnable() {
-        action.Enable();
+        pauseEvent.Add(pauseListener);
     }
 
     private void OnDisable() {
-        action.Disable();
-    }
-
-    private void Start() {
-        Resume();
-        action.Pause.PauseGame.performed += _ => {
-            if (isPaused) {
-                Resume();
-            } else {
-                Pause();
-            }
-        };
+        pauseEvent.Remove(pauseListener);
     }
 
     public void Pause() {
         Debug.Log("Pausing");
-        Time.timeScale = 0f;
-        pauseCanvas.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        inputs.Disable();
-        isPaused = true;
     }
 
     public void Resume() {
         Debug.Log("Resuming");
-        Time.timeScale = 1f;
-        pauseCanvas.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        inputs.Enable();
-        isPaused = false;
-    }
-
-    public bool IsPaused() {
-        return isPaused;
+        playerInput.SwitchCurrentActionMap("Player");
     }
 }

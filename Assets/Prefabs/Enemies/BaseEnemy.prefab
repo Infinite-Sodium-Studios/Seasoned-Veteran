@@ -430,11 +430,10 @@ GameObject:
   - component: {fileID: 6268522244322089666}
   - component: {fileID: 1334952321961393043}
   - component: {fileID: 4930267865431901068}
+  - component: {fileID: 6292152798325678417}
   - component: {fileID: -7836670644729748851}
   - component: {fileID: 4587699974411451965}
   - component: {fileID: -271878770104239177}
-  - component: {fileID: 8882603770142837422}
-  - component: {fileID: 7343264190897101561}
   - component: {fileID: 5978267952725375803}
   m_Layer: 0
   m_Name: BaseEnemy
@@ -539,6 +538,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6292152798325678417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552709428935382769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d660b1a2dda75554ca682d99b099aea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-7836670644729748851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,31 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 100
---- !u!114 &8882603770142837422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552709428935382769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d660b1a2dda75554ca682d99b099aea5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiationRoot: {fileID: 0}
---- !u!114 &7343264190897101561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7552709428935382769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0818b61de00190d488601323f57745a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  playerScoreSO: {fileID: 11400000, guid: 3d5fae45051694a458561e2a047c44e8, type: 2}
 --- !u!114 &5978267952725375803
 MonoBehaviour:
   m_ObjectHideFlags: 0

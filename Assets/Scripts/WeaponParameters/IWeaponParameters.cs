@@ -1,6 +1,5 @@
 using UnityEngine;
-public interface IWeaponParameters
+public abstract class IWeaponParameters: ScriptableObject
 {
-    BaseWeapon ToBaseWeapon();
-    GameObject GetWeaponModel();
+    public abstract BaseWeapon ToBaseWeapon();
 }
