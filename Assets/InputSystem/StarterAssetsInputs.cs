@@ -4,10 +4,7 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     public class StarterAssetsInputs : MonoBehaviour
-    {
-        [Header("Tweakable Parameters")]
-        private bool blockInputs = false;
-        
+    {   
         [Header("Character Input Values")]
         public Vector2 move;
         public Vector2 look;
@@ -23,10 +20,7 @@ namespace StarterAssets
         [SerializeField] private MouseSensitivitySO sensitivity;
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
-
-        void Start() {
-            Enable();
-        }
+        [SerializeField] private GameEvent<bool> pauseEvent;
 
         public void OnMove(InputValue value)
         {
@@ -88,6 +82,22 @@ namespace StarterAssets
             }
         }
 
+        public void OnPause(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                pauseEvent.Trigger(true);
+            }
+        }
+
+        public void OnResume(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                pauseEvent.Trigger(false);
+            }
+        }
+
         public void MoveInput(Vector2 newMoveDirection)
         {
             move = newMoveDirection;
@@ -95,7 +105,6 @@ namespace StarterAssets
 
         public void LookInput(Vector2 newLookDirection)
         {
-            if (blockInputs) return;
             var mouseSensitivity = sensitivity.GetMouseSensitivity();
             newLookDirection = Vector2.Scale(newLookDirection, new Vector2(mouseSensitivity, mouseSensitivity));
             look = newLookDirection;
@@ -118,7 +127,6 @@ namespace StarterAssets
 
         public void SelectWeaponIndexInput(int weaponIndex)
         {
-            if (blockInputs) return;
             selectedWeapon = weaponIndex;
         }
 
@@ -130,14 +138,6 @@ namespace StarterAssets
         private void SetCursorState(bool newState)
         {
             Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-        }
-
-        public void Enable() {
-            blockInputs = false;
-        }
-        
-        public void Disable() {
-            blockInputs = true;
         }
     }
 }

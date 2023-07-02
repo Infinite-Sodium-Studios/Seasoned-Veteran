@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4b9e104b276a04d98fc2bc6a39d058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseCanvas: {fileID: 0}
-  inputs: {fileID: 0}
+  playerInput: {fileID: 0}
+  pauseEvent: {fileID: 11400000, guid: ae7fd312a40237e4698b827a137042b5, type: 2}

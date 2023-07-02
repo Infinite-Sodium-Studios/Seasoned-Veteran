@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UnityGameEventListener<T> : MonoBehaviour, ITriggerable<T>
+public class StringUnityEventListener : MonoBehaviour, ITriggerable<string>
 {
-    public GameEvent<T> gameEvent;
-    public UnityEvent<T> onTrigger;
+    public StringGameEvent gameEvent;
+    public UnityEvent<string> onTrigger;
 
     void OnEnable()
     {
@@ -16,7 +16,8 @@ public class UnityGameEventListener<T> : MonoBehaviour, ITriggerable<T>
         gameEvent.Remove(this);
     }
 
-    public void OnTrigger(T arg)
+
+    public void OnTrigger(string arg)
     {
         onTrigger.Invoke(arg);
     }

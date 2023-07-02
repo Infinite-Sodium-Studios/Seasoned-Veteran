@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5872621727154354105}
   - component: {fileID: 86006191463563573}
   - component: {fileID: 4440497556094278981}
+  - component: {fileID: 3325904888796450331}
   - component: {fileID: 303525850985210208}
   - component: {fileID: 479707586409916327}
   m_Layer: 8
@@ -179,6 +180,7 @@ MonoBehaviour:
   sensitivity: {fileID: 11400000, guid: 4cfc5d00a9f44d248ac466b2b811e82b, type: 2}
   cursorLocked: 1
   cursorInputForLook: 1
+  pauseEvent: {fileID: 11400000, guid: ae7fd312a40237e4698b827a137042b5, type: 2}
 --- !u!114 &4440497556094278981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +280,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3325904888796450331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440497556094278985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8788f011969772441acf3f8edaaf0b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionMapEvent: {fileID: 11400000, guid: 5dae24ea2cae60241bc883de456f82bb, type: 2}
 --- !u!114 &303525850985210208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +352,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3950784614482380787}
     m_Modifications:
+    - target: {fileID: 2387913754527909711, guid: d2a1cbbe269facd44bb0fc3d11a26f83,
+        type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 1.1583892
+      objectReference: {fileID: 0}
     - target: {fileID: 7617852833803634513, guid: d2a1cbbe269facd44bb0fc3d11a26f83,
         type: 3}
       propertyPath: m_RootOrder

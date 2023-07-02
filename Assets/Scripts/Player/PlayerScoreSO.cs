@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerScore", menuName = "Player Score", order = 1)]
+[CreateAssetMenu(fileName = "PlayerScore", menuName = "Player/Score", order = 1)]
 public class PlayerScoreSO : Tickable
 {
     public PlayerScore playerScore { get; private set; }

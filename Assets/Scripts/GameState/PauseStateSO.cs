@@ -1,59 +1,64 @@
 using UnityEngine;
-using StarterAssets;
 
 [CreateAssetMenu(fileName = "PauseState", menuName = "Game State/Pause Manager", order = 1)]
-public class PauseState : ScriptableObject
+public class PauseStateSO : ScriptableObject
 {
-    [SerializeField] private GameObject pauseCanvas;
-    [SerializeField] private StarterAssetsInputs inputs;
-    private bool isPaused;
-    private PauseAction action;
-
-    private void Awake()
-    {
-        action = new PauseAction();
-    }
+    [SerializeField] private GameEvent<bool> pauseEvent;
+    [SerializeField] private GameEvent<string> actionMapEvent;
+    private TriggerableAction<bool> pauseListener;
 
     private void OnEnable() {
-        action.Enable();
+        pauseListener = new TriggerableAction<bool>((isPaused) => {
+            if (isPaused)
+            {
+                UnlockCursor();
+                HaltTime();
+                UseUIActionMap();
+            }
+            else
+            {
+                LockCursor();
+                ResumeTime();
+                UsePlayerActionMap();
+            }
+        });
+        pauseEvent.Add(pauseListener);
     }
 
     private void OnDisable() {
-        action.Disable();
+        pauseEvent.Remove(pauseListener);
     }
 
-    private void Start() {
-        Resume();
-        action.Pause.PauseGame.performed += _ => {
-            if (isPaused) {
-                Resume();
-            } else {
-                Pause();
-            }
-        };
-    }
-
-    public void Pause() {
-        Debug.Log("Pausing");
-        Time.timeScale = 0f;
-        pauseCanvas.SetActive(true);
+    void UnlockCursor()
+    {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        inputs.Disable();
-        isPaused = true;
     }
 
-    public void Resume() {
-        Debug.Log("Resuming");
-        Time.timeScale = 1f;
-        pauseCanvas.SetActive(false);
+    void LockCursor()
+    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        inputs.Enable();
-        isPaused = false;
     }
 
-    public bool IsPaused() {
-        return isPaused;
+    void HaltTime()
+    {
+        Time.timeScale = 0f;
+    }
+
+    void ResumeTime()
+    {
+        Time.timeScale = 1f;
+    }
+
+    void UseUIActionMap()
+    {
+        Debug.Assert(actionMapEvent != null, "actionMapEvent != null");
+        actionMapEvent.Trigger("UI");
+    }
+
+    void UsePlayerActionMap()
+    {
+        actionMapEvent.Trigger("Player");
     }
 }
