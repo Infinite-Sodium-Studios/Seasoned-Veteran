@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33fbfe4e0ac06d4f9543572791ac572, type: 3}
+  m_Name: AudioSwitcher
+  m_EditorClassIdentifier: 
+  audioClips:
+  - audioClip: {fileID: 8300000, guid: 5d4ef1b138e668a40a37e1e9e8177d37, type: 3}
+    audioType: {fileID: 11400000, guid: dd0064866125f384fb508874b39396e2, type: 2}
