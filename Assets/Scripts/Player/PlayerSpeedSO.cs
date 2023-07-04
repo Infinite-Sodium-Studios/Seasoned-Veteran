@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(fileName = "PlayerSpeed", menuName = "Player/Speed", order = 1)]
+[CreateAssetMenu(fileName = "PlayerSpeed", menuName = "Player/Speed")]
 public class PlayerSpeedSO : ScriptableObject
 {
     [NonSerialized] [HideInInspector] public float _speed = 0f;

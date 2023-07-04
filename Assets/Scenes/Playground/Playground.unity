@@ -310,6 +310,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4149063075792152155, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149063075792152155, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4571847761509088265, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -368,6 +378,11 @@ PrefabInstance:
     - target: {fileID: 4581533238442928654, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090756386372496167, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023820409259839299, guid: 40b8a442ed9fb5c4189cb0f55a4636dc,

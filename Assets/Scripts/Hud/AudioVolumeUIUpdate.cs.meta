@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: ea708d9e824a01b439e9db304961bcc1
+guid: 85cbdbf2078b70447baaa1318da8b372
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - pauseEvent: {instanceID: 0}
-  - audioSwitcher: {instanceID: 0}
-  - gameplayAudioType: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

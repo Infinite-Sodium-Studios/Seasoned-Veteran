@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "MouseSensitivity", menuName = "Player/Mouse Sensitivity", order = 1)]
+[CreateAssetMenu(fileName = "MouseSensitivity", menuName = "Player/Mouse Sensitivity")]
 public class MouseSensitivitySO : ScriptableObject
 {
     public float sensitivity;

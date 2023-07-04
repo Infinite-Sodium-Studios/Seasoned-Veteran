@@ -13,11 +13,22 @@ public class AudioReference
 public class AudioSwitcherSO: ScriptableObject
 {
     [SerializeField] private List<AudioReference> audioClips;
+    [SerializeField] private AudioVolumeSO audioVolumeSO;
     private Dictionary<AudioTypeSO, List<AudioSource>> sourcesByAudioType;
+    private List<Action<AudioTypeSO>> onVolumeChangedListeners;
 
     void OnEnable()
     {
         sourcesByAudioType = new Dictionary<AudioTypeSO, List<AudioSource>>();
+        onVolumeChangedListeners = new List<Action<AudioTypeSO>>();
+    }
+
+    void OnDisable()
+    {
+        foreach (var listener in onVolumeChangedListeners)
+        {
+            audioVolumeSO.OnVolumeChanged -= listener;
+        }
     }
 
     AudioReference GetAudioClip(AudioTypeSO audioType)
@@ -52,8 +63,19 @@ public class AudioSwitcherSO: ScriptableObject
             return;
         }
         AddAudioSource(audioType, source);
+        Action<AudioTypeSO> updateSourceVolume = (AudioTypeSO changedAudioType) => {
+            if (changedAudioType != audioType)
+            {
+                return;
+            }
+            source.volume = audioVolumeSO.GetVolume(audioType);
+        };
+        audioVolumeSO.OnVolumeChanged += updateSourceVolume;
+        onVolumeChangedListeners.Add(updateSourceVolume);
+
         source.clip = matchingClip.audioClip;
         source.loop = !justOnce;
+        updateSourceVolume(audioType);
         source.Play();
     }
 

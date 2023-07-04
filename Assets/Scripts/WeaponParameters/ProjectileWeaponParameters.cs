@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "ProjectileWeapon", menuName = "Weapon Parameters/Projectile", order = 1)]
+[CreateAssetMenu(fileName = "ProjectileWeapon", menuName = "Weapon Parameters/Projectile")]
 public class ProjectileWeaponParameters : IWeaponParameters
 {
     public int damage;

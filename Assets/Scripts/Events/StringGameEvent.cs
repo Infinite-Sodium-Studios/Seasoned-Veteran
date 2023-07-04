@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameEvent", menuName = "Game Event/String Game Event", order = 1)]
+[CreateAssetMenu(fileName = "GameEvent", menuName = "Game Event/String Game Event")]
 public class StringGameEvent: GameEvent<string>
 {
 }

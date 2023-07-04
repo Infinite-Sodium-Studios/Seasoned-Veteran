@@ -7,12 +7,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33fbfe4e0ac06d4f9543572791ac572, type: 3}
-  m_Name: AudioSwitcher
+  m_Script: {fileID: 11500000, guid: 73c322fa1e40eab4fa36d1cf052e7cc3, type: 3}
+  m_Name: AudioVolume
   m_EditorClassIdentifier: 
-  audioClips:
-  - audioClip: {fileID: 8300000, guid: 5d4ef1b138e668a40a37e1e9e8177d37, type: 3}
+  volumeSettings:
+  - defaultVolume: 0.5
     audioType: {fileID: 11400000, guid: dd0064866125f384fb508874b39396e2, type: 2}
-  audioVolumeSO: {fileID: 11400000, guid: eb0e169273afe3447b4af3952ebf2a01, type: 2}

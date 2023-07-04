@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameState", menuName = "Game State/Game State Manager", order = 1)]
+[CreateAssetMenu(fileName = "GameState", menuName = "Game State/Game State Manager")]
 public class GameStateSO: ScriptableObject
 {
     [SerializeField] private IntGameEvent loadSceneEvent;

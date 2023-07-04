@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PauseState", menuName = "Game State/Pause Manager", order = 1)]
+[CreateAssetMenu(fileName = "PauseState", menuName = "Game State/Pause Manager")]
 public class PauseStateSO : ScriptableObject
 {
     [SerializeField] private GameEvent<bool> pauseEvent;
