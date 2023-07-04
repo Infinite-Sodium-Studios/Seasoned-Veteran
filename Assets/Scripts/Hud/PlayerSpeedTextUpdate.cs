@@ -4,12 +4,12 @@ using TMPro;
 
 public class PlayerSpeedTextUpdate : MonoBehaviour
 {
-    [SerializeField] private QuakeFirstPersonController controller;
+    [SerializeField] private PlayerSpeedSO playerSpeedSO;
     [SerializeField] private TextMeshProUGUI textElement;
 
     void Update()
     {
-        var speed = controller.GetSpeed();
+        var speed = playerSpeedSO.GetSpeed();
         speed = Mathf.Round(speed * 10f);
         string textValue = speed.ToString();
         while (textValue.Length < 3) {

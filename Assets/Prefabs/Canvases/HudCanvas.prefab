@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a478c3e1ca101e14f98d50d9d78fce7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  playerSpeedSO: {fileID: 11400000, guid: 437120e84bcd2b24a8c3c6b5ae6ff4a1, type: 2}
   textElement: {fileID: 1771719294906249967}
 --- !u!23 &1771719294906249964
 MeshRenderer:

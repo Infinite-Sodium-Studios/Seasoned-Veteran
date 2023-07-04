@@ -18,6 +18,11 @@ public class TargetEnemyCollision : MonoBehaviour
         {
             yield return null;
         }
+        if (collider.gameObject == null) {
+            // if we destroy the enemy right as it hits the target
+            // favor the player and ignore the collision
+            yield return null;
+        }
         Destroy(collider.gameObject);
         playerScore.OnEnemyEscape();
         if (playerScore.RemainingLives() <= 0)

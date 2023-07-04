@@ -4,7 +4,7 @@ using StarterAssets;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
-public class QuakeFirstPersonController : MonoBehaviour
+public class QuakeFirstPersonController : IPlayerController
 {
 	[Header("Player")]
 	[SerializeField] private MovementParameters movementParameters;
@@ -173,7 +173,7 @@ public class QuakeFirstPersonController : MonoBehaviour
 		return Mathf.Clamp(lfAngle, lfMin, lfMax);
 	}
 
-	public float GetSpeed()
+	public override float GetSpeed()
 	{
 		var velocity = _controller.velocity;
 		var horizontalVelocity = new Vector3(velocity.x, 0.0f, velocity.z);
